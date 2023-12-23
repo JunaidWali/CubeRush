@@ -1,1 +1,1 @@
-#### Cube Rush
+# Cube Rush
