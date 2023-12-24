@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player1Movement : MonoBehaviour
 {
 	// This is a reference to the Rigidbody component called "rb"
 	public Rigidbody rb;
+
+	private Vector3 respawnPos = new Vector3(0, 1, 0);
+
+	public float restartDelay = 1f;         // Time to wait before restarting the level
 
 	public float forwardForce = 6000f;  // Variable that determines the forward force
 	public float sidewaysForce = 130f;  // Variable that determines the sideways force
@@ -20,7 +22,6 @@ public class Player1Movement : MonoBehaviour
 
 	void Update()
 	{
-
 		if (Input.GetKey(KeyCode.RightArrow)) // If the player is pressing the right arrow key
 		{
 			rightMoveRequest = true;
@@ -70,13 +71,35 @@ public class Player1Movement : MonoBehaviour
 
 		if (rb.position.y < -1f)
 		{
-			FindObjectOfType<RestartCheckpointP1>().RestartFromCheckpoint();
+			this.enabled = false;
+			RestartFromCheckpoint();
 		}
-
 	}
 
 	public void setGrounded(bool grounded)
 	{
 		isGrounded = grounded;
+	}
+
+	public void RestartFromCheckpoint()
+	{
+		// We check if the object we collided with has a tag called "Obstacle".
+		Invoke("Reset", restartDelay);
+	}
+
+	// This function should restart the position of the player back to the starting point
+	public void Reset()
+	{
+		// Reset the position of the player back to starting point
+		rb.velocity = Vector3.zero;
+		rb.angularVelocity = Vector3.zero;
+		rb.rotation = Quaternion.identity;
+		rb.position = respawnPos;
+		this.enabled = true;
+	}
+
+	public void setRespawnPos(Vector3 pos)
+	{
+		respawnPos = pos;
 	}
 }
