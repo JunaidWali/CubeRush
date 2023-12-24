@@ -1,17 +1,36 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
 	bool gameHasEnded = false;
 
-	public float restartDelay = 2f;
+	public float restartDelay = 1f;
 
 	public GameObject completeLevelUI;
 
-	public void CompleteLevel ()
+	public void CompleteLevel()
 	{
-		EndGame();
+		// Get the build index of the current active scene
+		int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+		// Check if there is another scene to load
+		if (currentSceneIndex < SceneManager.sceneCountInBuildSettings - 1)
+		{
+			// Load the next scene
+			LoadNextLevel();
+		}
+		else
+		{
+			// Load the first scene
+			SceneManager.LoadScene(0);
+		}
+	}
+
+	public void LoadNextLevel()
+	{
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 	}
 
 	public void EndGame()
@@ -24,9 +43,10 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	void Restart ()
+	void Restart()
 	{
-		SceneManager.LoadScene("Level01");
+		// Reloads the current active scene
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 
 }
