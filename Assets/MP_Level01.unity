@@ -2213,29 +2213,34 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114480738963725108, guid: c86df17c13775e94f8f7b33b5bab4be2,
+        type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 114842211378620554, guid: c86df17c13775e94f8f7b33b5bab4be2,
         type: 3}
       propertyPath: movement
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 114480738963725108, guid: c86df17c13775e94f8f7b33b5bab4be2, type: 3}
     - {fileID: 114842211378620554, guid: c86df17c13775e94f8f7b33b5bab4be2, type: 3}
+    - {fileID: 114480738963725108, guid: c86df17c13775e94f8f7b33b5bab4be2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1109301919913132, guid: c86df17c13775e94f8f7b33b5bab4be2,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1296780253}
+      addedObject: {fileID: 1296780259}
     - targetCorrespondingSourceObject: {fileID: 1109301919913132, guid: c86df17c13775e94f8f7b33b5bab4be2,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1296780252}
+      addedObject: {fileID: 1296780258}
     - targetCorrespondingSourceObject: {fileID: 1109301919913132, guid: c86df17c13775e94f8f7b33b5bab4be2,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1296780251}
+      addedObject: {fileID: 1296780257}
   m_SourcePrefab: {fileID: 100100000, guid: c86df17c13775e94f8f7b33b5bab4be2, type: 3}
 --- !u!4 &1296780248 stripped
 Transform:
@@ -2255,7 +2260,7 @@ Rigidbody:
     type: 3}
   m_PrefabInstance: {fileID: 1296780247}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1296780251
+--- !u!114 &1296780257
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2264,13 +2269,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1296780249}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 477975957b8ef7945bab95362d076b4a, type: 3}
+  m_Script: {fileID: 11500000, guid: 856dc1bafbd7a3241951bac56db30bf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {fileID: 1296780253}
+  movement: {fileID: 1296780259}
   player: {fileID: 1296780248}
   restartDelay: 1
---- !u!114 &1296780252
+--- !u!114 &1296780258
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2279,11 +2284,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1296780249}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54b9ee2633659804ab00aed861053e3f, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b296190e5d530c40b5c05d34115eaf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {fileID: 1296780253}
---- !u!114 &1296780253
+  movement: {fileID: 1296780259}
+--- !u!114 &1296780259
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2292,7 +2297,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1296780249}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 219cde9ab526d654fae7d9eb38eb060f, type: 3}
+  m_Script: {fileID: 11500000, guid: 58a16ae05ce65534da0f726029b22f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1296780250}
@@ -2973,7 +2978,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   restartDelay: 1
-  completeLevelUI: {fileID: 0}
 --- !u!1001 &1727140661
 PrefabInstance:
   m_ObjectHideFlags: 0

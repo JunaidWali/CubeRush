@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MPPlayerMovement : MonoBehaviour
+public class Player2Movement : MonoBehaviour
 {
 	// This is a reference to the Rigidbody component called "rb"
 	public Rigidbody rb;
@@ -20,48 +20,21 @@ public class MPPlayerMovement : MonoBehaviour
 
 	void Update()
 	{
-
-		// Player 1 movement
-		if (gameObject.name == "Player1")
+		if (Input.GetKey("d")) // If the player is pressing the "d" key
 		{
-			if (Input.GetKey(KeyCode.RightArrow)) // If the player is pressing the right arrow key
-			{
-				rightMoveRequest = true;
-			}
-
-			if (Input.GetKey(KeyCode.LeftArrow)) // If the player is pressing the left arrow key
-			{
-				leftMoveRequest = true;
-			}
-
-			if (Input.GetKeyDown(KeyCode.UpArrow)) // If the player presses the up arrow key
-			{
-				if (isGrounded)
-				{
-					jumpRequest = true;
-				}
-			}
+			rightMoveRequest = true;
 		}
 
-		// Player 2 movement
-		else if (gameObject.name == "Player2")
+		if (Input.GetKey("a")) // If the player is pressing the "a" key
 		{
-			if (Input.GetKey("d")) // If the player is pressing the "d" key
-			{
-				rightMoveRequest = true;
-			}
+			leftMoveRequest = true;
+		}
 
-			if (Input.GetKey("a")) // If the player is pressing the "a" key
+		if (Input.GetKeyDown("w")) // If the player presses the "w" key
+		{
+			if (isGrounded)
 			{
-				leftMoveRequest = true;
-			}
-
-			if (Input.GetKeyDown("w")) // If the player presses the "w" key
-			{
-				if (isGrounded)
-				{
-					jumpRequest = true;
-				}
+				jumpRequest = true;
 			}
 		}
 	}
@@ -96,7 +69,7 @@ public class MPPlayerMovement : MonoBehaviour
 
 		if (rb.position.y < -1f)
 		{
-			FindObjectOfType<MPRestartCheckpoint>().RestartFromCheckpoint();
+			FindObjectOfType<RestartCheckpointP2>().RestartFromCheckpoint();
 		}
 	}
 
