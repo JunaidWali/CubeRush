@@ -1,17 +1,18 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class MPPlayerMovement : MonoBehaviour
 {
-
 	// This is a reference to the Rigidbody component called "rb"
 	public Rigidbody rb;
 
 	public float forwardForce = 6000f;  // Variable that determines the forward force
 	public float sidewaysForce = 130f;  // Variable that determines the sideways force
 
-    public float jumpForce = 3.35f; // Variable that determines the jump force
+	public float jumpForce = 3.35f; // Variable that determines the jump force
 
-    
+	// Player 1 movement requests
 	private bool jumpRequest = false;
 	private bool rightMoveRequest = false;
 	private bool leftMoveRequest = false;
@@ -20,24 +21,49 @@ public class PlayerMovement : MonoBehaviour
 	void Update()
 	{
 
-		if (Input.GetKey("d") || Input.GetKey(KeyCode.RightArrow)) // If the player is pressing the "d" key or right arrow key
+		// Player 1 movement
+		if (gameObject.name == "Player1")
 		{
-			rightMoveRequest = true;
-		}
-
-		if (Input.GetKey("a") || Input.GetKey(KeyCode.LeftArrow)) // If the player is pressing the "a" key or left arrow key
-		{
-			leftMoveRequest = true;
-		}
-
-		if (Input.GetKeyDown(KeyCode.Space)) // If the player presses the "space" key
-		{
-			if (isGrounded)
+			if (Input.GetKey(KeyCode.RightArrow)) // If the player is pressing the right arrow key
 			{
-				jumpRequest = true;
+				rightMoveRequest = true;
+			}
+
+			if (Input.GetKey(KeyCode.LeftArrow)) // If the player is pressing the left arrow key
+			{
+				leftMoveRequest = true;
+			}
+
+			if (Input.GetKeyDown(KeyCode.UpArrow)) // If the player presses the up arrow key
+			{
+				if (isGrounded)
+				{
+					jumpRequest = true;
+				}
 			}
 		}
 
+		// Player 2 movement
+		else if (gameObject.name == "Player2")
+		{
+			if (Input.GetKey("d")) // If the player is pressing the "d" key
+			{
+				rightMoveRequest = true;
+			}
+
+			if (Input.GetKey("a")) // If the player is pressing the "a" key
+			{
+				leftMoveRequest = true;
+			}
+
+			if (Input.GetKeyDown("w")) // If the player presses the "w" key
+			{
+				if (isGrounded)
+				{
+					jumpRequest = true;
+				}
+			}
+		}
 	}
 
 	// We marked this as "Fixed"Update because we
@@ -61,7 +87,6 @@ public class PlayerMovement : MonoBehaviour
 			leftMoveRequest = false;
 		}
 
-
 		if (isGrounded && jumpRequest)
 		{
 			// Add a force to jump upwards
@@ -71,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
 
 		if (rb.position.y < -1f)
 		{
-			FindObjectOfType<GameManager>().EndGame();
+			FindObjectOfType<MPRestartCheckpoint>().RestartFromCheckpoint();
 		}
 	}
 
