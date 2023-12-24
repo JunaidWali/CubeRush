@@ -13,7 +13,7 @@ public class Player2Collision : MonoBehaviour
         if (collisionInfo.collider.tag == "Obstacle")
         {
             movement.enabled = false;   // Disable the players movement.
-            FindObjectOfType<RestartCheckpointP2>().RestartFromCheckpoint();
+            movement.RestartFromCheckpoint();
         }
 
         // We check if the object we collided with has a tag called "Ground".
@@ -22,7 +22,6 @@ public class Player2Collision : MonoBehaviour
             movement.setGrounded(true); // Enable the player1's movement.
         }
     }
-
 
     void OnCollisionExit(Collision collisionInfo)
     {

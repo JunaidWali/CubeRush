@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CheckpointP1 : MonoBehaviour
 {
-    public Player1Movement player1Movement;
+    public Player1Movement movement;
 
-    void OnTriggerEnter()
+    void OnTriggerEnter(Collider other)
     {
-
-        // Call the method in Player1Movement that updates the respawn position
-        player1Movement.setRespawnPos(transform.position);
-
+        if (other.gameObject.name == "Player1")
+        {
+            movement.setRespawnPos(transform.position);
+        }
     }
-
-
 }
