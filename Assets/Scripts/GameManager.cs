@@ -5,16 +5,16 @@ public class GameManager : MonoBehaviour {
 
 	bool gameHasEnded = false;
 
-	public float restartDelay = 1f;
+	public float restartDelay = 2f;
 
 	public GameObject completeLevelUI;
 
 	public void CompleteLevel ()
 	{
-		Restart();
+		EndGame();
 	}
 
-	public void EndGame ()
+	public void EndGame()
 	{
 		if (gameHasEnded == false)
 		{
