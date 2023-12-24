@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class MPPlayerCollision : MonoBehaviour
+public class Player1Collision : MonoBehaviour
 {
 
-    public MPPlayerMovement movement;     // A reference to our PlayerMovement script
+    public Player1Movement movement;     // A reference to our PlayerMovement script
 
     // This function runs when we hit another object.
     // We get information about the collision and call it "collisionInfo".
@@ -13,7 +13,7 @@ public class MPPlayerCollision : MonoBehaviour
         if (collisionInfo.collider.tag == "Obstacle")
         {
             movement.enabled = false;   // Disable the players movement.
-            FindObjectOfType<MPRestartCheckpoint>().Restart();
+            FindObjectOfType<RestartCheckpointP1>().RestartFromCheckpoint();
         }
 
         // We check if the object we collided with has a tag called "Ground".
