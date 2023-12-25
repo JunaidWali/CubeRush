@@ -1,0 +1,40 @@
+.button-main-title {
+    -unity-font-style: bold;
+    font-size: 32px;
+    background-color: rgb(238, 236, 236);
+    border-top-width: 3px;
+    border-right-width: 3px;
+    border-bottom-width: 3px;
+    border-left-width: 3px;
+    border-left-color: rgba(0, 0, 0, 0.4);
+    border-right-color: rgba(0, 0, 0, 0.4);
+    border-top-color: rgba(0, 0, 0, 0.4);
+    border-bottom-color: rgba(0, 0, 0, 0.4);
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    border-bottom-right-radius: 18px;
+    border-bottom-left-radius: 18px;
+    margin-top: 119px;
+    margin-right: 119px;
+    margin-bottom: 119px;
+    margin-left: 119px;
+    padding-top: 35px;
+    padding-right: 35px;
+    padding-bottom: 35px;
+    padding-left: 35px;
+    -unity-font: url('project://database/Assets/UI%20Toolkit/Fonts/Roboto-Bold.ttf?fileID=12800000&guid=daff509277f55904f97179ea330730ef&type=3#Roboto-Bold');
+    letter-spacing: 12px;
+    word-spacing: 6px;
+}
+
+.button-main-title:hover {
+    width: auto;
+    height: auto;
+    scale: 1.1 1.1;
+    transition-delay: 0s;
+    transition-duration: 0.15s;
+}
+
+.button-main-title:active {
+    background-color: rgb(184, 183, 183);
+}

@@ -1,0 +1,24 @@
+.label-main-title {
+    background-color: rgba(230, 230, 230, 0);
+    color: rgb(27, 27, 27);
+    font-size: 71px;
+    -unity-font: url('project://database/Assets/UI%20Toolkit/Fonts/Roboto-Bold.ttf?fileID=12800000&guid=daff509277f55904f97179ea330730ef&type=3#Roboto-Bold');
+    -unity-font-style: bold;
+    -unity-text-align: lower-center;
+    margin-top: -11px;
+    margin-right: -11px;
+    margin-bottom: -11px;
+    margin-left: -11px;
+    padding-top: 25px;
+    padding-right: 25px;
+    padding-bottom: 25px;
+    padding-left: 25px;
+    -unity-text-outline-width: -6px;
+    letter-spacing: 15px;
+    word-spacing: 4px;
+    -unity-background-scale-mode: stretch-to-fill;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+}

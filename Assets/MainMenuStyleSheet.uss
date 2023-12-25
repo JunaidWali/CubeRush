@@ -1,0 +1,35 @@
+:root {
+    justify-content: center;
+    align-items: center;
+
+}
+
+.container {
+    
+} 
+
+.bordered-box {
+    border: 1px solid black;
+}
+
+.title-box {
+    width: 80%;
+    height: 20%;
+    align-self: center;
+    justify-self: center;
+    font-size: 30px;
+    font-family: "Roboto";
+    color: red;
+    font-weight: bold;
+}
+
+.title-box > * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-box {
+    
+}
+
