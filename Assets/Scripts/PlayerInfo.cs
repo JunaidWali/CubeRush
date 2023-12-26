@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class Player2Movement : MonoBehaviour
+public class PlayerInfo : MonoBehaviour
 {
 	// This is a reference to the Rigidbody component called "rb"
 	public Rigidbody rb;
 
-	private Vector3 respawnPos = new Vector3(0, 1, 0);
+	protected Vector3 respawnPos = new Vector3(0, 1, 0);
 
 	public float restartDelay = 1f;         // Time to wait before restarting the level
 
@@ -15,31 +15,10 @@ public class Player2Movement : MonoBehaviour
 	public float jumpForce = 3.35f; // Variable that determines the jump force
 
 	// Player 1 movement requests
-	private bool jumpRequest = false;
-	private bool rightMoveRequest = false;
-	private bool leftMoveRequest = false;
-	private bool isGrounded;
-
-	void Update()
-	{
-		if (Input.GetKey("d")) // If the player is pressing the "d" key
-		{
-			rightMoveRequest = true;
-		}
-
-		if (Input.GetKey("a")) // If the player is pressing the "a" key
-		{
-			leftMoveRequest = true;
-		}
-
-		if (Input.GetKeyDown("w")) // If the player presses the "w" key
-		{
-			if (isGrounded)
-			{
-				jumpRequest = true;
-			}
-		}
-	}
+	protected bool jumpRequest = false;
+	protected bool rightMoveRequest = false;
+	protected bool leftMoveRequest = false;
+	protected bool isGrounded;
 
 	// We marked this as "Fixed"Update because we
 	// are using it to mess with physics.

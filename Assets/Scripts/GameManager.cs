@@ -1,52 +1,86 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+	public enum GameMode { SinglePlayer, MultiPlayer }
+	public static GameMode CurrentGameMode { get; private set; }
 
-	bool gameHasEnded = false;
-
-	public float restartDelay = 1f;
-
-	public GameObject completeLevelUI;
-
-	public void CompleteLevel()
+	public static void SetGameMode(GameMode mode)
 	{
-		// Get the build index of the current active scene
-		int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+		CurrentGameMode = mode;
+	}
 
-		// Check if there is another scene to load
-		if (currentSceneIndex < SceneManager.sceneCountInBuildSettings - 1)
+	public static void StartGame()
+	{
+		string prefix = CurrentGameMode == GameMode.SinglePlayer ? "SP" : "MP";
+
+		for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
 		{
-			// Load the next scene
-			LoadNextLevel();
+			string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
+			string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
+
+			if (sceneName.StartsWith(prefix))
+			{
+				LoadLevel(sceneName);
+				break;
+			}
+		}
+	}
+
+	public static void LoadNextLevel()
+	{
+		int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+		string nextScenePath = SceneUtility.GetScenePathByBuildIndex(nextSceneIndex);
+		string nextSceneName = System.IO.Path.GetFileNameWithoutExtension(nextScenePath);
+
+		string prefix = CurrentGameMode == GameMode.SinglePlayer ? "SP" : "MP";
+
+		if (nextSceneName.StartsWith(prefix))
+		{
+			LoadLevel(nextSceneName);
 		}
 		else
 		{
-			// Load the first scene
-			SceneManager.LoadScene(0);
+			LoadGameOver();
 		}
 	}
 
-	public void LoadNextLevel()
+	public static void LoadMainMenu()
 	{
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+		SceneManager.LoadScene("Main_Menu");
 	}
 
-	public void EndGame()
+	public static void LoadGameOver()
 	{
-		if (gameHasEnded == false)
-		{
-			gameHasEnded = true;
-			Debug.Log("GAME OVER");
-			Invoke("Restart", restartDelay);
-		}
+		SceneManager.LoadScene("Game_Over");
 	}
 
-	void Restart()
+	public static void LoadLevel(string levelName)
 	{
-		// Reloads the current active scene
-		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		SceneManager.LoadScene(levelName);
+		SceneManager.LoadScene("Lighting", LoadSceneMode.Additive);
 	}
 
+	public static void PauseGame()
+	{
+		Time.timeScale = 0f;
+	}
+
+	public static void ResumeGame()
+	{
+		Time.timeScale = 1f;
+	}
+
+	public static void RestartLevel()
+	{
+		string activeSceneName = SceneManager.GetActiveScene().name;
+		LoadLevel(activeSceneName);
+	}
+
+	public static void QuitGame()
+	{
+		Application.Quit();
+	}
 }

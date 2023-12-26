@@ -2,12 +2,8 @@ using UnityEngine;
 
 public class EndTrigger : MonoBehaviour
 {
-
-	public GameManager gameManager;
-
-	void OnTriggerEnter()
+	void OnTriggerEnter(Collider player)
 	{
-		gameManager.CompleteLevel();
+		GameManager.LoadNextLevel();
 	}
-
 }
