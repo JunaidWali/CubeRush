@@ -4,12 +4,12 @@
     <ui:VisualElement name="Background" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/UI%20Toolkit/Backgrounds/TitleScreen.png?fileID=2800000&amp;guid=797c0b40790d97c44adeb9bdcec86f35&amp;type=3#TitleScreen&apos;); flex-direction: column;">
         <ui:VisualElement name="Blur" style="flex-grow: 1; width: auto; background-color: rgba(255, 255, 255, 0.67); flex-direction: column; height: auto;">
             <ui:VisualElement name="Title" style="flex-grow: 0; height: 60%;">
-                <ui:Label tabindex="-1" text="Welcome to" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Welcome-to" class="label-main-title" style="height: 50%;" />
-                <ui:Label tabindex="-1" text="Cush Rush" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Cube-Rush" class="label-main-title" />
+                <ui:Label tabindex="-1" text="Game Over!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Game-Over" class="label-main-title" style="height: 50%;" />
+                <ui:Label tabindex="-1" text="Thanks for playing" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Thanks-for-playing" class="label-main-title" />
             </ui:VisualElement>
             <ui:VisualElement name="Buttons" style="flex-grow: 1; flex-direction: row; justify-content: center; align-self: stretch; align-items: center;">
-                <ui:Button text="Single Player" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Single-Player" class="button-main-title" />
-                <ui:Button text="Multi Player" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Multi-Player" class="button-main-title" />
+                <ui:Button text="Main Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Main-Menu" class="button-main-title" />
+                <ui:Button text="Quit Game" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Quit-Game" class="button-main-title" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
