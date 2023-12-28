@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Main_Menu.unity
+    path: Assets/UI_Scenes/Main_Menu.unity
     guid: 316b9464a3e661843bc46af0c7d443da
   - enabled: 1
     path: Assets/SP_Levels/SP_Level01.unity
@@ -21,6 +21,12 @@ EditorBuildSettings:
     path: Assets/MP_Levels/MP_Level02.unity
     guid: a10a928b9b6a44148b6cf1e41d047c49
   - enabled: 1
-    path: Assets/Game_Over.unity
+    path: Assets/UI_Scenes/Game_Over.unity
     guid: 2167144d74b5e154ca78635f7cbb7f76
+  - enabled: 1
+    path: Assets/UI_Scenes/Pause_Menu.unity
+    guid: 4c77f2f7f06940041a006b2d1cdfb4aa
+  - enabled: 1
+    path: Assets/Lighting.unity
+    guid: dd20076237644bb4eb7c96d3a707da4c
   m_configObjects: {}
