@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class PlayerControls : PlayerInfo
 {
-	void Update()
+    
+    void Update()
 	{
 		if (Input.GetKey("d") || Input.GetKey(KeyCode.RightArrow)) // If the player is pressing the "d" key or right arrow key
 		{
@@ -21,6 +22,18 @@ public class PlayerControls : PlayerInfo
 				jumpRequest = true;
 			}
 		}
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (GameManager.GetIsPaused() == true)
+            {
+                GameManager.ResumeGame();
+            }
+            else
+            {
+                GameManager.PauseGame();
+            }
+        }
 
 	}
 }
