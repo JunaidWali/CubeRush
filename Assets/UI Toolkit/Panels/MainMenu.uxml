@@ -5,7 +5,7 @@
         <ui:VisualElement name="Blur" style="flex-grow: 1; width: auto; background-color: rgba(255, 255, 255, 0.67); flex-direction: column; height: auto;">
             <ui:VisualElement name="Title" style="flex-grow: 0; height: 60%;">
                 <ui:Label tabindex="-1" text="Welcome to" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Welcome-to" class="label-main-title" style="height: 50%;" />
-                <ui:Label tabindex="-1" text="Cush Rush" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Cube-Rush" class="label-main-title" />
+                <ui:Label tabindex="-1" text="Cube Rush" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Cube-Rush" class="label-main-title" />
             </ui:VisualElement>
             <ui:VisualElement name="Buttons" style="flex-grow: 1; flex-direction: row; justify-content: center; align-self: stretch; align-items: center;">
                 <ui:Button text="Single Player" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Single-Player" class="button-main-title" />
