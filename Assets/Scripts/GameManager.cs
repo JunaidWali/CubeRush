@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +5,9 @@ public class GameManager : MonoBehaviour
 {
     public enum GameMode { SinglePlayer, MultiPlayer }
     public static GameMode CurrentGameMode { get; private set; }
+
+    private static int activeSceneIndex;
+    private static string activeSceneName;
 
     private static bool isPaused = false;
 
@@ -26,31 +28,22 @@ public class GameManager : MonoBehaviour
 
     public static void StartGame()
     {
-        string prefix = CurrentGameMode == GameMode.SinglePlayer ? "SP" : "MP";
-
-        for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+        SceneManager.LoadScene("Environment");
+        if (CurrentGameMode == GameMode.SinglePlayer)
         {
-            string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
-            string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
-
-            if (sceneName.StartsWith(prefix))
-            {
-                LoadLevel(sceneName);
-                break;
-            }
+            LoadLevel("SP_Level01");
+        }
+        else if (CurrentGameMode == GameMode.MultiPlayer)
+        {
+            LoadLevel("MP_Level01");
         }
     }
 
-
-
     public static void LoadNextLevel()
     {
-        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        string nextScenePath = SceneUtility.GetScenePathByBuildIndex(nextSceneIndex);
-        string nextSceneName = System.IO.Path.GetFileNameWithoutExtension(nextScenePath);
-
+        int nextSceneIndex = activeSceneIndex + 1;
+        string nextSceneName = getSceneName(nextSceneIndex);
         string prefix = CurrentGameMode == GameMode.SinglePlayer ? "SP" : "MP";
-
         if (nextSceneName.StartsWith(prefix))
         {
             LoadLevel(nextSceneName);
@@ -58,6 +51,32 @@ public class GameManager : MonoBehaviour
         else
         {
             LoadGameOver();
+        }
+    }
+
+    public static void LoadLevel(string levelName)
+    {
+        if (activeSceneName != null)
+        {
+            Scene activeScene = SceneManager.GetSceneByName(activeSceneName);
+            if (activeScene.isLoaded)
+            {
+                SceneManager.UnloadSceneAsync(activeSceneName);
+            }
+        }
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.LoadScene(levelName, LoadSceneMode.Additive);
+
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name == levelName)
+            {
+                SceneManager.SetActiveScene(scene);
+                activeSceneName = levelName;
+                activeSceneIndex = scene.buildIndex;
+                SceneManager.sceneLoaded -= OnSceneLoaded;
+            }
         }
     }
 
@@ -72,17 +91,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Game_Over");
     }
 
-    public static void LoadLevel(string levelName)
-    {
-        SceneManager.LoadScene(levelName);
-        SceneManager.LoadScene("Lighting", LoadSceneMode.Additive);
-    }
-
     public static void PauseGame()
     {
         // Load the pause menu scene additively
-        SceneManager.LoadScene("Pause_Menu", LoadSceneMode.Additive);
         Time.timeScale = 0f;
+        SceneManager.LoadScene("Pause_Menu", LoadSceneMode.Additive);
         isPaused = true;
     }
 
@@ -100,9 +113,18 @@ public class GameManager : MonoBehaviour
 
     public static void RestartLevel()
     {
+        if (SceneManager.GetSceneByName(activeSceneName).isLoaded)
+        {
+            LoadLevel(activeSceneName);
+        }
         ResumeGame();
-        string activeSceneName = SceneManager.GetActiveScene().name;
-        LoadLevel(activeSceneName);
+    }
+
+    public static string getSceneName(int buildIndex)
+    {
+        string scenePath = SceneUtility.GetScenePathByBuildIndex(buildIndex);
+        string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
+        return sceneName;
     }
 
     public static void QuitGame()
