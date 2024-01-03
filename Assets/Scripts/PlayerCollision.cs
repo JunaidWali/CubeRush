@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-    private PlayerInfo player;
+    private PlayerController player;
 
     void Start()
     {
         // Get the player's info
-        player = gameObject.GetComponent<PlayerInfo>();
+        player = gameObject.GetComponent<PlayerController>();
     }
 
     // This function runs when we hit another object.
@@ -15,25 +15,25 @@ public class PlayerCollision : MonoBehaviour
     void OnCollisionEnter(Collision collisionInfo)
     {
         // We check if the object we collided with has a tag called "Obstacle".
-        if (collisionInfo.collider.tag == "Obstacle")
+        if (collisionInfo.collider.CompareTag("Obstacle"))
         {
             player.enabled = false;   // Disable the players movement.
             player.RestartFromCheckpoint();
         }
 
         // We check if the object we collided with has a tag called "Ground".
-        if (collisionInfo.collider.tag == "Ground")
+        if (collisionInfo.collider.CompareTag("Ground"))
         {
-            player.setGrounded(true);
+            player.SetGrounded(true);
         }
     }
 
     void OnCollisionExit(Collision collisionInfo)
     {
         // We check if the object we collided with has a tag called "Ground".
-        if (collisionInfo.collider.tag == "Ground")
+        if (collisionInfo.collider.CompareTag("Ground"))
         {
-            player.setGrounded(false);
+            player.SetGrounded(false);
         }
     }
 }

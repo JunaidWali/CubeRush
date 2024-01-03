@@ -9,7 +9,8 @@ EditorSettings:
   m_DefaultBehaviorMode: 0
   m_PrefabRegularEnvironment: {fileID: 102900000, guid: dd20076237644bb4eb7c96d3a707da4c,
     type: 3}
-  m_PrefabUIEnvironment: {fileID: 0}
+  m_PrefabUIEnvironment: {fileID: 102900000, guid: 316b9464a3e661843bc46af0c7d443da,
+    type: 3}
   m_SpritePackerMode: 2
   m_SpritePackerCacheSize: 10
   m_SpritePackerPaddingPower: 1
