@@ -31,20 +31,20 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Environment");
         if (CurrentGameMode == GameMode.SinglePlayer)
         {
-            LoadLevel("SP_Level01");
+            SceneManager.LoadScene("SP_GameMode", LoadSceneMode.Additive);
         }
         else if (CurrentGameMode == GameMode.MultiPlayer)
         {
-            LoadLevel("MP_Level01");
+            SceneManager.LoadScene("MP_GameMode", LoadSceneMode.Additive);
         }
+        LoadLevel("Level01");
     }
 
     public static void LoadNextLevel()
     {
         int nextSceneIndex = activeSceneIndex + 1;
         string nextSceneName = getSceneName(nextSceneIndex);
-        string prefix = CurrentGameMode == GameMode.SinglePlayer ? "SP" : "MP";
-        if (nextSceneName.StartsWith(prefix))
+        if (nextSceneName.StartsWith("Level"))
         {
             LoadLevel(nextSceneName);
         }
@@ -115,7 +115,18 @@ public class GameManager : MonoBehaviour
     {
         if (SceneManager.GetSceneByName(activeSceneName).isLoaded)
         {
-            LoadLevel(activeSceneName);
+            if (CurrentGameMode == GameMode.SinglePlayer)
+            {
+                PlayerController player = GameObject.Find("Player").GetComponent<PlayerController>();
+                player.Reset();
+            }
+            else if (CurrentGameMode == GameMode.MultiPlayer)
+            {
+                PlayerController player1 = GameObject.Find("Player 1").GetComponent<PlayerController>();
+                PlayerController player2 = GameObject.Find("Player 2").GetComponent<PlayerController>();
+                player1.Reset();
+                player2.Reset();
+            }
         }
         ResumeGame();
     }

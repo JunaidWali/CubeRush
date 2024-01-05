@@ -8,8 +8,13 @@ public class PlayerController : MonoBehaviour
 
 	private Vector3 respawnPos;
 
-	// Player movement variables
+	// Reference to the player's spot lights
+	public Light spotLight;
 
+	// Refernce to the player's camera
+	public Camera playerCamera;
+
+	// Player movement variables
 	public float restartDelay = 1f;         // Time to wait before restarting the level
 
 	public float forwardForce = 6000f;  // Variable that determines the forward force
@@ -57,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			if (GameManager.GetIsPaused() == true)
+			if (GameManager.GetIsPaused())
 			{
 				GameManager.ResumeGame();
 			}
@@ -123,11 +128,28 @@ public class PlayerController : MonoBehaviour
 		rb.angularVelocity = Vector3.zero;
 		rb.rotation = Quaternion.identity;
 		rb.position = respawnPos;
+		ShowPlayer();
 		this.enabled = true;
 	}
 
 	public void SetRespawnPos(Vector3 pos)
 	{
 		respawnPos = pos;
+	}
+
+	public void HidePlayer()
+	{
+		GetComponent<Renderer>().enabled = false;
+		GetComponent<BoxCollider>().enabled = false;
+		spotLight.enabled = false;
+		playerCamera.GetComponent<FollowPlayer>().enabled = false;
+	}
+
+	public void ShowPlayer()
+	{
+		GetComponent<Renderer>().enabled = true;
+		GetComponent<BoxCollider>().enabled = true;
+		spotLight.enabled = true;
+		playerCamera.GetComponent<FollowPlayer>().enabled = true;
 	}
 }

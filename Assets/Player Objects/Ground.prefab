@@ -53,7 +53,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 092d3ec57f1936e4496ed5943a182588, type: 2}
+  - {fileID: 2100000, guid: e1689826822e4ef4686b17e5014d830c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 8724430434959069997}
   - component: {fileID: 3252598455540824473}
   - component: {fileID: 3716147608962907413}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 092d3ec57f1936e4496ed5943a182588, type: 2}
+  - {fileID: 2100000, guid: e1689826822e4ef4686b17e5014d830c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
