@@ -3,11 +3,17 @@ using UnityEngine;
 public class PlayerCollision : MonoBehaviour
 {
     private PlayerController player;
+    private ParticleSystem particleEffect;
+
+    
 
     void Start()
     {
         // Get the player's info
         player = gameObject.GetComponent<PlayerController>();
+
+        // Get the particle effect
+        particleEffect = gameObject.GetComponentInChildren<ParticleSystem>();
     }
 
     // This function runs when we hit another object.
@@ -18,6 +24,8 @@ public class PlayerCollision : MonoBehaviour
         if (collisionInfo.collider.CompareTag("Obstacle"))
         {
             player.enabled = false;   // Disable the players movement.
+            particleEffect.Play();    // Play the particle effect.
+            player.HidePlayer();      // Hide the player.
             player.RestartFromCheckpoint();
         }
 
