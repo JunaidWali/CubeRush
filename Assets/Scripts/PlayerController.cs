@@ -1,5 +1,6 @@
+using System;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour
 
 	// Refernce to the player's camera
 	public Camera playerCamera;
+	private Vector3 playerCameraStartingPosition;    // Camera starting position
 
 	// Player movement variables
 	public float restartDelay = 1f;         // Time to wait before restarting the level
@@ -38,6 +40,8 @@ public class PlayerController : MonoBehaviour
 		// We assign the Rigidbody component to our rb variable
 		rb = GetComponent<Rigidbody>();
 		respawnPos = rb.position;
+
+		playerCameraStartingPosition = playerCamera.transform.position;
 	}
 
 	void Update()
@@ -123,13 +127,20 @@ public class PlayerController : MonoBehaviour
 	// This function should restart the position of the player back to the starting point
 	public void Reset()
 	{
+		this.enabled = false;
+		playerCamera.GetComponent<FollowPlayer>().enabled = false;
 		// Reset the position of the player back to starting point
 		rb.velocity = Vector3.zero;
 		rb.angularVelocity = Vector3.zero;
 		rb.rotation = Quaternion.identity;
 		rb.position = respawnPos;
 		ShowPlayer();
-		this.enabled = true;
+
+		// Start the coroutine to reset the camera's position
+		StartCoroutine(MoveCamera(2f, () =>
+		{ // 2f is the duration in seconds
+			this.enabled = true;
+		}));
 	}
 
 	public void SetRespawnPos(Vector3 pos)
@@ -151,5 +162,26 @@ public class PlayerController : MonoBehaviour
 		GetComponent<BoxCollider>().enabled = true;
 		spotLight.enabled = true;
 		playerCamera.GetComponent<FollowPlayer>().enabled = true;
+	}
+
+	IEnumerator MoveCamera(float duration, Action callback)
+	{
+		Vector3 startingPosition = playerCamera.transform.position;
+		float elapsedTime = 0;
+
+		while (elapsedTime < duration)
+		{
+			float t = elapsedTime / duration; // Calculate the fraction for Lerp
+			playerCamera.transform.position = Vector3.Lerp(startingPosition, playerCameraStartingPosition, t);
+			elapsedTime += Time.deltaTime;
+			yield return null;
+		}
+
+		// Ensure the position is set to the starting position when the duration is over
+		playerCamera.transform.position = playerCameraStartingPosition;
+		playerCamera.GetComponent<FollowPlayer>().enabled = true;
+
+		// Call the callback after the coroutine has finished
+		callback();
 	}
 }
