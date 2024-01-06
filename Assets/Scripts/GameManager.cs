@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public enum GameMode { SinglePlayer, MultiPlayer }
     public static GameMode CurrentGameMode { get; private set; }
+
+    //public Animator transition;
 
     private static int activeSceneIndex;
     private static string activeSceneName;
@@ -85,6 +88,13 @@ public class GameManager : MonoBehaviour
         ResumeGame();
         SceneManager.LoadScene("Main_Menu");
     }
+
+/*     IEnumerator MainMenuAnimation()
+    {
+        transition.SetTrigger("Start");
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("Main_Menu");
+    } */
 
     public static void LoadGameOver()
     {
