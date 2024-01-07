@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
+    // A reference to the player's controller script.
     private PlayerController player;
-    private ParticleSystem particleEffect;
 
-    
+    // The particle effect that plays when we hit an obstacle.
+    private ParticleSystem particleEffect;
 
     void Start()
     {
