@@ -1,54 +1,107 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get; private set; }
+
     public enum GameMode { SinglePlayer, MultiPlayer }
-    public static GameMode CurrentGameMode { get; private set; }
+    public GameMode CurrentGameMode { get; private set; }
 
-    //public Animator transition;
+    [SerializeField] private Animator transition;
+    private float transitionTime = 0.5f;
 
-    private static int activeSceneIndex;
-    private static string activeSceneName;
+    private int activeSceneIndex;
+    private string activeSceneName;
 
-    private static bool isPaused = false;
+    private bool isPaused = false;
 
-    public static bool GetIsPaused()
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public bool GetIsPaused()
     {
         return isPaused;
     }
 
-    public static void SetIsPaused(bool value)
+    public void SetIsPaused(bool value)
     {
         isPaused = value;
     }
 
-    public static void SetGameMode(GameMode mode)
+    public void StartGameAs(GameMode mode)
     {
+        string animationTrigger;
+        string gameModeScene;
+
         CurrentGameMode = mode;
+
+        if (mode == GameMode.SinglePlayer)
+        {
+            animationTrigger = "Load_SP";
+            gameModeScene = "SP_GameMode";
+        }
+        else
+        {
+            animationTrigger = "Load_MP";
+            gameModeScene = "MP_GameMode";
+        }
+
+        transition.SetTrigger(animationTrigger);
+        StartCoroutine(LoadStartUpScenes(gameModeScene, "Level01", "Environment"));
     }
 
-    public static void StartGame()
+    public IEnumerator LoadStartUpScenes(string gameModeScene, string levelName, string environmentName)
     {
-        SceneManager.LoadScene("Environment");
-        if (CurrentGameMode == GameMode.SinglePlayer)
+        yield return new WaitForSeconds(transitionTime);
+
+        // Unload and then load level
+        if (SceneManager.GetSceneByName(levelName).isLoaded)
         {
-            SceneManager.LoadScene("SP_GameMode", LoadSceneMode.Additive);
+            yield return SceneManager.UnloadSceneAsync(levelName);
         }
-        else if (CurrentGameMode == GameMode.MultiPlayer)
+        yield return StartCoroutine(LoadLevel(levelName));
+
+        // Unload Main-Menu if loaded
+        if (SceneManager.GetSceneByName("Main_Menu").isLoaded)
         {
-            SceneManager.LoadScene("MP_GameMode", LoadSceneMode.Additive);
+            SceneManager.UnloadSceneAsync("Main_Menu");
         }
-        LoadLevel("Level01");
+
+        // Unload and then load environment
+        if (SceneManager.GetSceneByName(environmentName).isLoaded)
+        {
+            yield return SceneManager.UnloadSceneAsync(environmentName);
+        }
+        SceneManager.LoadScene(environmentName, LoadSceneMode.Additive);
+
+        // Unload and then load game mode
+        if (SceneManager.GetSceneByName(gameModeScene).isLoaded)
+        {
+            yield return SceneManager.UnloadSceneAsync(gameModeScene);
+        }
+        SceneManager.LoadScene(gameModeScene, LoadSceneMode.Additive);
+        transition.SetTrigger("Start_Level");
     }
 
-    public static void LoadNextLevel()
+    public void LoadNextLevel()
     {
         int nextSceneIndex = activeSceneIndex + 1;
-        string nextSceneName = getSceneName(nextSceneIndex);
+        string nextSceneName = GetSceneName(nextSceneIndex);
         if (nextSceneName.StartsWith("Level"))
         {
-            LoadLevel(nextSceneName);
+            StartCoroutine(LoadLevel(nextSceneName));
         }
         else
         {
@@ -56,59 +109,57 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public static void LoadLevel(string levelName)
+    public IEnumerator LoadLevel(string levelName)
     {
         if (activeSceneName != null)
         {
             Scene activeScene = SceneManager.GetSceneByName(activeSceneName);
             if (activeScene.isLoaded)
             {
-                SceneManager.UnloadSceneAsync(activeSceneName);
+                yield return SceneManager.UnloadSceneAsync(activeSceneName);
             }
         }
 
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneManager.LoadScene(levelName, LoadSceneMode.Additive);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(levelName, LoadSceneMode.Additive);
 
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        // Wait until the scene is loaded
+        while (!asyncLoad.isDone)
         {
-            if (scene.name == levelName)
-            {
-                SceneManager.SetActiveScene(scene);
-                activeSceneName = levelName;
-                activeSceneIndex = scene.buildIndex;
-                SceneManager.sceneLoaded -= OnSceneLoaded;
-            }
+            yield return null;
+        }
+
+        // Get the loaded scene
+        Scene loadedScene = SceneManager.GetSceneByName(levelName);
+
+        // If the scene was found, set it as the active scene
+        if (loadedScene.isLoaded)
+        {
+            SceneManager.SetActiveScene(loadedScene);
+            activeSceneName = levelName;
+            activeSceneIndex = loadedScene.buildIndex;
         }
     }
 
-    public static void LoadMainMenu()
+    public void LoadMainMenu()
     {
         ResumeGame();
-        SceneManager.LoadScene("Main_Menu");
+        StartCoroutine(LoadScenesWithTransition("Main_Menu", "Start_MainMenu_Load", "Load_MainMenu"));
     }
 
-/*     IEnumerator MainMenuAnimation()
-    {
-        transition.SetTrigger("Start");
-        yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene("Main_Menu");
-    } */
-
-    public static void LoadGameOver()
+    public void LoadGameOver()
     {
         SceneManager.LoadScene("Game_Over");
     }
 
-    public static void PauseGame()
+    public void PauseGame()
     {
         // Load the pause menu scene additively
         Time.timeScale = 0f;
-        SceneManager.LoadScene("Pause_Menu", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("Pause_Menu", LoadSceneMode.Additive);
         isPaused = true;
     }
 
-    public static void ResumeGame()
+    public void ResumeGame()
     {
         // Unload the pause menu scene
         if (SceneManager.GetSceneByName("Pause_Menu").isLoaded)
@@ -120,34 +171,40 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public static void RestartLevel()
+    public void RestartLevel()
     {
+        ResumeGame();
         if (SceneManager.GetSceneByName(activeSceneName).isLoaded)
         {
+            transition.SetTrigger("Load_Restart");
             if (CurrentGameMode == GameMode.SinglePlayer)
             {
-                PlayerController player = GameObject.Find("Player").GetComponent<PlayerController>();
-                player.Reset();
+                StartCoroutine(LoadStartUpScenes("SP_GameMode", activeSceneName, "Environment"));
             }
-            else if (CurrentGameMode == GameMode.MultiPlayer)
+            else
             {
-                PlayerController player1 = GameObject.Find("Player 1").GetComponent<PlayerController>();
-                PlayerController player2 = GameObject.Find("Player 2").GetComponent<PlayerController>();
-                player1.Reset();
-                player2.Reset();
+                StartCoroutine(LoadStartUpScenes("MP_GameMode", activeSceneName, "Environment"));
             }
         }
-        ResumeGame();
+
     }
 
-    public static string getSceneName(int buildIndex)
+    public IEnumerator LoadScenesWithTransition(string sceneName, string startAnimation, string endAnimation)
+    {
+        transition.SetTrigger(startAnimation);
+        yield return new WaitForSeconds(transitionTime);
+        SceneManager.LoadScene(sceneName);
+        transition.SetTrigger(endAnimation);
+    }
+
+    public string GetSceneName(int buildIndex)
     {
         string scenePath = SceneUtility.GetScenePathByBuildIndex(buildIndex);
         string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
         return sceneName;
     }
 
-    public static void QuitGame()
+    public void QuitGame()
     {
         Application.Quit();
     }

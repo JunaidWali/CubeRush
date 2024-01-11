@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
-    public void RestartLevelButton()
+    public void OnRestartLevelButtonClick()
     {
-        GameManager.RestartLevel();
+        GameManager.Instance.RestartLevel();
     }
 
-    public void ResumeButton()
+    public void OnResumeButtonClick()
     {
-        GameManager.ResumeGame();
+        GameManager.Instance.ResumeGame();
     }
 
-    public void MainMenuButton()
+    public void OnMainMenuButtonClick()
     {
-        GameManager.LoadMainMenu();
+        GameManager.Instance.LoadMainMenu();
     }
 }
