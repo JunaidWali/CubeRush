@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
 
 	private Vector3 respawnPos;
 
+	public string playerName;
+
 	// Reference to the player's spot lights
 	public Light spotLight;
 
@@ -66,16 +68,15 @@ public class PlayerController : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			if (GameManager.GetIsPaused())
+			if (GameManager.Instance.GetIsPaused())
 			{
-				GameManager.ResumeGame();
-			}
+                GameManager.Instance.ResumeGame();
+            }
 			else
 			{
-				GameManager.PauseGame();
-			}
+                GameManager.Instance.PauseGame();
+            }
 		}
-
 	}
 
 	// We marked this as "Fixed"Update because we

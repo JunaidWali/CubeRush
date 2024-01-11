@@ -9,17 +9,17 @@ EditorBuildSettings:
     path: Assets/UI_Scenes/Main_Menu.unity
     guid: 316b9464a3e661843bc46af0c7d443da
   - enabled: 1
-    path: Assets/Levels/Level01.unity
-    guid: 4e2a71a5825b54446bfc91d589aaa492
-  - enabled: 1
-    path: Assets/Levels/Level02.unity
-    guid: 7e2a4319209a2d546994bb3218496ceb
-  - enabled: 1
     path: Assets/GameMode/SP_GameMode.unity
     guid: 8091b91f29268d84fbd045d756446ce0
   - enabled: 1
     path: Assets/GameMode/MP_GameMode.unity
     guid: 00890bbeba091bc40be362ffda081f7b
+  - enabled: 1
+    path: Assets/Levels/Level01.unity
+    guid: 4e2a71a5825b54446bfc91d589aaa492
+  - enabled: 1
+    path: Assets/Levels/Level02.unity
+    guid: 7e2a4319209a2d546994bb3218496ceb
   - enabled: 1
     path: Assets/UI_Scenes/Pause_Menu.unity
     guid: 4c77f2f7f06940041a006b2d1cdfb4aa

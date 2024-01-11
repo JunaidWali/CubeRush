@@ -2,15 +2,13 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    public void SinglePlayerButton()
+    public void OnSinglePlayerButtonClick()
     {
-        GameManager.SetGameMode(GameManager.GameMode.SinglePlayer);
-        GameManager.StartGame();
+        GameManager.Instance.StartGameAs(GameManager.GameMode.SinglePlayer);
     }
 
-    public void MultiPlayerButton()
+    public void OnMultiPlayerButtonClick()
     {
-        GameManager.SetGameMode(GameManager.GameMode.MultiPlayer);
-        GameManager.StartGame();
+        GameManager.Instance.StartGameAs(GameManager.GameMode.MultiPlayer);
     }
 }

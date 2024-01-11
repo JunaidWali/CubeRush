@@ -4,11 +4,11 @@ public class GameOverMenu : MonoBehaviour
 {
     public void MainMenuButton()
     {
-        GameManager.LoadMainMenu();
+        GameManager.Instance.LoadMainMenu();
     }
 
     public void QuitGameButton()
     {
-        GameManager.QuitGame();
+        GameManager.Instance.QuitGame();
     }
 }
