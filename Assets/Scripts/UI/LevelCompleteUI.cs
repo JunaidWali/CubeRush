@@ -1,15 +1,15 @@
 using UnityEngine;
 
-public class PauseMenu : MonoBehaviour
+public class LevelCompleteUI : MonoBehaviour
 {
     public void OnRestartLevelButtonClick()
     {
         GameManager.Instance.RestartLevel();
     }
 
-    public void OnResumeButtonClick()
+    public void OnNextLevelButtonClick()
     {
-        GameManager.Instance.ResumeGame();
+        GameManager.Instance.LoadNextLevel();
     }
 
     public void OnMainMenuButtonClick()

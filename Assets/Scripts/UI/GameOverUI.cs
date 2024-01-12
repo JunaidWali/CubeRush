@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GameOverMenu : MonoBehaviour
+public class GameOverUI : MonoBehaviour
 {
     public void MainMenuButton()
     {
