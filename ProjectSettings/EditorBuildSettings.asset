@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Levels/Level02.unity
     guid: 7e2a4319209a2d546994bb3218496ceb
   - enabled: 1
+    path: Assets/UI_Scenes/Complete_Level.unity
+    guid: 4d749f039d864764d9c4f07e09147b4e
+  - enabled: 1
     path: Assets/UI_Scenes/Pause_Menu.unity
     guid: 4c77f2f7f06940041a006b2d1cdfb4aa
   - enabled: 1
