@@ -683,6 +683,123 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1372351721}
   m_CullTransparentMesh: 1
+--- !u!1 &1420219376
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1420219377}
+  - component: {fileID: 1420219378}
+  - component: {fileID: 1420219379}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1420219377
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420219376}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1336.5256, y: 656.3084, z: -33.967484}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1420219378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420219376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8c8af10bdfb3134f900fc64834d5a1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: MainMenuTheme
+    clip: {fileID: 8300000, guid: dfd3574752c332246b1307e548a740f2, type: 3}
+    loop: 1
+    playOnAwake: 0
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: ButtonClick
+    clip: {fileID: 8300000, guid: 8ddbb3cb406d045698e3f086efb20942, type: 3}
+    loop: 0
+    playOnAwake: 0
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: Pause
+    clip: {fileID: 8300000, guid: 8e3acccd6b4314c4ca3dc81a29e0505f, type: 3}
+    loop: 0
+    playOnAwake: 0
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: Unpause
+    clip: {fileID: 8300000, guid: 7f654842aaf974ca39064687927e7574, type: 3}
+    loop: 0
+    playOnAwake: 0
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: Jump
+    clip: {fileID: 8300000, guid: 8154f5e18ea48164e9cb0132012cf432, type: 3}
+    loop: 0
+    playOnAwake: 0
+    volume: 0.7
+    pitch: 1
+    source: {fileID: 0}
+  - name: PlayerStartMovement
+    clip: {fileID: 8300000, guid: 0470ffe2dac878047ba1eee586bd834c, type: 3}
+    loop: 0
+    playOnAwake: 0
+    volume: 0.6
+    pitch: 1
+    source: {fileID: 0}
+  - name: PlayerContinousMovement
+    clip: {fileID: 8300000, guid: b3024fad7fc03f144b22f592a7a19375, type: 3}
+    loop: 1
+    playOnAwake: 0
+    volume: 0.6
+    pitch: 1
+    source: {fileID: 0}
+  - name: PlayerCrash
+    clip: {fileID: 8300000, guid: bddcb25502b410940b1f286fc805956f, type: 3}
+    loop: 0
+    playOnAwake: 0
+    volume: 0.6
+    pitch: 1
+    source: {fileID: 0}
+  - name: LevelTheme
+    clip: {fileID: 8300000, guid: 26364aaf1f64b40c1a047b0bacfbd10e, type: 3}
+    loop: 1
+    playOnAwake: 0
+    volume: 0.3
+    pitch: 1
+    source: {fileID: 0}
+--- !u!81 &1420219379
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420219376}
+  m_Enabled: 1
 --- !u!1 &1511411939
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,7 +839,7 @@ Transform:
   m_GameObject: {fileID: 1511411939}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1136.1909, y: 646.8461, z: -3.7868366}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -987,5 +1104,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1511411941}
+  - {fileID: 1420219377}
   - {fileID: 1188701177}
   - {fileID: 1732680056}

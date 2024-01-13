@@ -4,6 +4,7 @@ public class PauseMenuUI : MonoBehaviour
 {
     public void OnRestartLevelButtonClick()
     {
+        AudioManager.Instance.Play("ButtonClick");
         GameManager.Instance.RestartLevel();
     }
 
@@ -14,6 +15,7 @@ public class PauseMenuUI : MonoBehaviour
 
     public void OnMainMenuButtonClick()
     {
+        AudioManager.Instance.Play("ButtonClick");
         GameManager.Instance.LoadMainMenu();
     }
 }
