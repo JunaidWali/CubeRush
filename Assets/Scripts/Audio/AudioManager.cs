@@ -20,7 +20,8 @@ public class AudioManager : MonoBehaviour
 
         foreach (Sound sound in sounds)
         {
-            sound.SetSource(gameObject.AddComponent<AudioSource>());
+            AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+            sound.SetSource(audioSource);
         }
     }
 
