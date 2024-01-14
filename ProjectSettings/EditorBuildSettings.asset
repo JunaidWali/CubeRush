@@ -6,30 +6,27 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/UI_Scenes/Main_Menu.unity
+    path: Assets/Scenes/UI/UI_MainMenu.unity
     guid: 316b9464a3e661843bc46af0c7d443da
   - enabled: 1
-    path: Assets/GameMode/SP_GameMode.unity
+    path: Assets/Scenes/GameMode/SP_GameMode.unity
     guid: 8091b91f29268d84fbd045d756446ce0
   - enabled: 1
-    path: Assets/GameMode/MP_GameMode.unity
+    path: Assets/Scenes/GameMode/MP_GameMode.unity
     guid: 00890bbeba091bc40be362ffda081f7b
   - enabled: 1
-    path: Assets/Levels/Level01.unity
+    path: Assets/Scenes/Levels/Level01.unity
     guid: 4e2a71a5825b54446bfc91d589aaa492
   - enabled: 1
-    path: Assets/Levels/Level02.unity
+    path: Assets/Scenes/Levels/Level02.unity
     guid: 7e2a4319209a2d546994bb3218496ceb
   - enabled: 1
-    path: Assets/UI_Scenes/Complete_Level.unity
+    path: Assets/Scenes/UI/UI_LevelComplete.unity
     guid: 4d749f039d864764d9c4f07e09147b4e
   - enabled: 1
-    path: Assets/UI_Scenes/Pause_Menu.unity
-    guid: 4c77f2f7f06940041a006b2d1cdfb4aa
-  - enabled: 1
-    path: Assets/UI_Scenes/Game_Over.unity
+    path: Assets/Scenes/UI/UI_GameOver.unity
     guid: 2167144d74b5e154ca78635f7cbb7f76
   - enabled: 1
-    path: Assets/Environment.unity
+    path: Assets/Scenes/Environment/Space.unity
     guid: dd20076237644bb4eb7c96d3a707da4c
   m_configObjects: {}

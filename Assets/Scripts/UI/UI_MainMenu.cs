@@ -1,14 +1,15 @@
 using UnityEngine;
 
-public class MainMenuUI : MonoBehaviour
+public class UI_MainMenu : MonoBehaviour
 {
-    public void Start()
+    void Start()
     {
         AudioManager.Instance.Play("MainMenuTheme");
     }
 
     public void OnSinglePlayerButtonClick()
     {
+        AudioManager.Instance.Stop("MainMenuTheme");
         AudioManager.Instance.Play("ButtonClick");
         GameManager.Instance.SetCurrentGameMode(GameManager.GameMode.SinglePlayer);
         GameManager.Instance.StartGameAs();
@@ -16,6 +17,7 @@ public class MainMenuUI : MonoBehaviour
 
     public void OnMultiPlayerButtonClick()
     {
+        AudioManager.Instance.Stop("MainMenuTheme");
         AudioManager.Instance.Play("ButtonClick");
         GameManager.Instance.SetCurrentGameMode(GameManager.GameMode.MultiPlayer);
         GameManager.Instance.StartGameAs();

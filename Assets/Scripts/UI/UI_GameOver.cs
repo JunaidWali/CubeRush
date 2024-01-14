@@ -1,11 +1,12 @@
 using UnityEngine;
 
-public class GameOverUI : MonoBehaviour
+public class UI_GameOver : MonoBehaviour
 {
     public void MainMenuButton()
     {
+        AudioManager.Instance.StopAll();
         AudioManager.Instance.Play("ButtonClick");
-        GameManager.Instance.LoadMainMenu();
+        GameManager.Instance.LoadUI(GameManager.UIScene.UI_MainMenu);
     }
 
     public void QuitGameButton()
