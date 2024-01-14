@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
@@ -9,14 +10,35 @@ public class GameManager : MonoBehaviour
     public enum GameMode { SinglePlayer, MultiPlayer }
     public GameMode CurrentGameMode { get; private set; }
 
+    public enum GameModeScene
+    {
+        SP_GameMode,
+        MP_GameMode
+    }
+
+    public enum UIScene
+    {
+        UI_MainMenu,
+        UI_LevelComplete,
+        UI_GameOver
+    }
+
+    public enum LevelScene
+    {
+        Level01,
+        Level02
+    }
+
+    public enum EnvironmentScene
+    {
+        Space
+    }
+
     [SerializeField] private Animator transition;
     private readonly float transitionTime = 0.5f;
 
     private int activeSceneIndex;
-    private string activeSceneName;
-
-    private bool isPaused = false;
-    private bool isGameActive = false;
+    private LevelScene activeSceneName;
 
     void Awake()
     {
@@ -31,29 +53,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (isGameActive)
-            {
-                if (isPaused)
-                {
-                    ResumeGame();
-                }
-                else
-                {
-                    PauseGame();
-                }
-            }
-        }
-    }
-
-    public GameMode GetCurrentGameMode()
-    {
-        return CurrentGameMode;
-    }
-
     public void SetCurrentGameMode(GameMode mode)
     {
         CurrentGameMode = mode;
@@ -61,34 +60,32 @@ public class GameManager : MonoBehaviour
 
     public void StartGameAs()
     {
-        AudioManager.Instance.Stop("MainMenuTheme");
         string startAnimTrigger = CurrentGameMode == GameMode.SinglePlayer ? "Start_SP_Load" : "Start_MP_Load";
-
-        StartCoroutine(LoadStartUpScenes(startAnimTrigger, "Level01", "Environment", "Load_Level"));
+        StartCoroutine(LoadStartUpScenes(startAnimTrigger, LevelScene.Level01, EnvironmentScene.Space, "Load_Level"));
     }
 
     public void LoadNextLevel()
     {
         int nextSceneIndex = activeSceneIndex + 1;
         string nextSceneName = GetSceneName(nextSceneIndex);
-        if (nextSceneName.StartsWith("Level"))
+        if (Enum.TryParse(nextSceneName, out LevelScene nextLevel))
         {
-            StartCoroutine(LoadStartUpScenes("Start_NextLevel_Load", nextSceneName, "Environment", "Load_Level"));
+            StartCoroutine(LoadStartUpScenes("Start_NextLevel_Load", nextLevel, EnvironmentScene.Space, "Load_Level"));
         }
         else
         {
-            LoadGameOver();
+            LoadUI(UIScene.UI_GameOver);
         }
     }
 
-    private IEnumerator LoadLevel(string levelName)
+    private IEnumerator LoadLevel(LevelScene levelName)
     {
-        if (!string.IsNullOrEmpty(activeSceneName))
+        if (!string.IsNullOrEmpty(activeSceneName.ToString()))
         {
-            yield return StartCoroutine(UnloadSceneIfLoaded(activeSceneName));
+            yield return StartCoroutine(UnloadSceneIfLoaded(activeSceneName.ToString()));
         }
 
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(levelName, LoadSceneMode.Additive);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(levelName.ToString(), LoadSceneMode.Additive);
 
         // Wait until the scene is loaded
         while (!asyncLoad.isDone)
@@ -97,7 +94,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Get the loaded scene
-        Scene loadedScene = SceneManager.GetSceneByName(levelName);
+        Scene loadedScene = SceneManager.GetSceneByName(levelName.ToString());
 
         // If the scene was found, set it as the active scene
         if (loadedScene.isLoaded)
@@ -108,89 +105,48 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void LoadCompleteLevel(string playerName)
+    public void LoadUI(UIScene UI_SceneName)
     {
-        isGameActive = false;
-        AudioManager.Instance.Stop("LevelTheme");
-        StartCoroutine(LoadSceneWithTransition("Start_LevelComplete_Load", "Complete_Level", "Load_LevelComplete"));
-    }
-
-    public void LoadMainMenu()
-    {   
-        isGameActive = false;
-        AudioManager.Instance.Stop("LevelTheme");
-        ResumeGame();
-        StartCoroutine(LoadSceneWithTransition("Start_MainMenu_Load", "Main_Menu", "Load_MainMenu"));
-    }
-
-    public void LoadGameOver()
-    {
-        StartCoroutine(LoadSceneWithTransition("Start_NextLevel_Load", "Game_Over", "Load_GameOver"));
-    }
-
-    public void PauseGame()
-    {
-        AudioManager.Instance.Pause("LevelTheme");
-        AudioManager.Instance.Play("Pause");
-        // Load the pause menu scene additively
-        Time.timeScale = 0f;
-        SceneManager.LoadSceneAsync("Pause_Menu", LoadSceneMode.Additive);
-        isPaused = true;
-    }
-
-    public void ResumeGame()
-    {
-        // Unload the pause menu scene
-        if (SceneManager.GetSceneByName("Pause_Menu").isLoaded)
-        {
-            AudioManager.Instance.Play("Unpause");
-            SceneManager.UnloadSceneAsync("Pause_Menu");
-            Time.timeScale = 1f;
-            isPaused = false;
-            AudioManager.Instance.UnPause("LevelTheme");
-        }
+        StartCoroutine(LoadSceneWithTransition($"Start_{UI_SceneName}_Load", UI_SceneName.ToString(), $"Load_{UI_SceneName}"));
     }
 
     public void RestartLevel()
     {
-        AudioManager.Instance.Stop("LevelTheme");
-        ResumeGame();
-        StartCoroutine(LoadStartUpScenes("Start_Restart_Load", activeSceneName, "Environment", "Load_Level"));
+        StartCoroutine(LoadStartUpScenes("Start_Restart_Load", activeSceneName, EnvironmentScene.Space, "Load_Level"));
     }
 
-    private IEnumerator LoadStartUpScenes(string startAnimTrigger, string levelName, string environmentName, string endAnimTrigger)
+    private IEnumerator LoadStartUpScenes(string startAnimTrigger, LevelScene levelName, EnvironmentScene environmentName, string endAnimTrigger)
     {
         transition.SetTrigger(startAnimTrigger);
-        yield return new WaitForSeconds(transitionTime);
+        yield return new WaitForSecondsRealtime(transitionTime);
 
-        // Unload if loaded and then load level
-        yield return StartCoroutine(UnloadSceneIfLoaded(levelName));
-        yield return StartCoroutine(LoadLevel(levelName));
+        // Unload if loaded and then load environment
+        yield return StartCoroutine(UnloadSceneIfLoaded(environmentName.ToString()));
+        yield return SceneManager.LoadSceneAsync(environmentName.ToString(), LoadSceneMode.Additive);
 
         // Unload Main-Menu if loaded
-        StartCoroutine(UnloadSceneIfLoaded("Main_Menu"));
+        StartCoroutine(UnloadSceneIfLoaded(UIScene.UI_MainMenu.ToString()));
 
         // Unload Level-Complete if loaded
-        StartCoroutine(UnloadSceneIfLoaded("Complete_Level"));
-
-        // Unload and then load environment
-        yield return StartCoroutine(UnloadSceneIfLoaded(environmentName));
-        yield return SceneManager.LoadSceneAsync(environmentName, LoadSceneMode.Additive);
+        StartCoroutine(UnloadSceneIfLoaded(UIScene.UI_LevelComplete.ToString()));
 
         // Unload and then load game mode
         yield return StartCoroutine(LoadGameModeScene());
 
+        // Unload if loaded and then load level
+        yield return StartCoroutine(UnloadSceneIfLoaded(levelName.ToString()));
+        yield return StartCoroutine(LoadLevel(levelName));
+
         transition.SetTrigger(endAnimTrigger);
-        AudioManager.Instance.Play("LevelTheme");
-        isGameActive = true;
+        Time.timeScale = 1f;
     }
 
     private IEnumerator LoadGameModeScene()
     {
-        string gameModeScene = CurrentGameMode == GameMode.SinglePlayer ? "SP_GameMode" : "MP_GameMode";
+        GameModeScene gameModeScene = CurrentGameMode == GameMode.SinglePlayer ? GameModeScene.SP_GameMode : GameModeScene.MP_GameMode;
 
-        yield return StartCoroutine(UnloadSceneIfLoaded(gameModeScene));
-        yield return SceneManager.LoadSceneAsync(gameModeScene, LoadSceneMode.Additive);
+        yield return StartCoroutine(UnloadSceneIfLoaded(gameModeScene.ToString()));
+        yield return SceneManager.LoadSceneAsync(gameModeScene.ToString(), LoadSceneMode.Additive);
     }
 
     private IEnumerator UnloadSceneIfLoaded(string SceneName)
@@ -204,7 +160,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator LoadSceneWithTransition(string startAnimTrigger, string sceneName, string endAnimTrigger)
     {
         transition.SetTrigger(startAnimTrigger);
-        yield return new WaitForSeconds(transitionTime);
+        yield return new WaitForSecondsRealtime(transitionTime);
         yield return SceneManager.LoadSceneAsync(sceneName);
         transition.SetTrigger(endAnimTrigger);
     }

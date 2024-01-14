@@ -37,7 +37,9 @@ public class PlayerController : MonoBehaviour
 	private bool leftMoveRequest = false;
 	private bool isGrounded = true;
 
-	private AudioSource playerMovementAudio;
+	[SerializeField] private AudioSource playerStartMovementAudio;
+	[SerializeField] private AudioSource playerContinousMovementAudio;
+	[SerializeField] private AudioSource playerJumpAudio;
 	private float targetPitch = 1f;
 
 	void Awake()
@@ -47,8 +49,6 @@ public class PlayerController : MonoBehaviour
 		respawnPos = rb.position;
 
 		playerCameraStartingPosition = playerCamera.transform.position;
-
-		playerMovementAudio = AudioManager.Instance.GetAudioSource("PlayerContinousMovement");
 	}
 
 	IEnumerator Start()
@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
 		{
 			if (isGrounded)
 			{
-				AudioManager.Instance.Play("Jump");
+				playerJumpAudio.Play();
 				jumpRequest = true;
 			}
 		}
@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
 			targetPitch = 1f;
 		}
 
-		playerMovementAudio.pitch = Mathf.Lerp(playerMovementAudio.pitch, targetPitch, Time.deltaTime * 10);
+		playerContinousMovementAudio.pitch = Mathf.Lerp(playerContinousMovementAudio.pitch, targetPitch, Time.deltaTime * 10);
 	}
 
 	// We marked this as "Fixed"Update because we
@@ -152,14 +152,15 @@ public class PlayerController : MonoBehaviour
 		rb.velocity = Vector3.zero;
 		rb.angularVelocity = Vector3.zero;
 		rb.rotation = Quaternion.identity;
-		playerMovementAudio.Stop();
+		playerContinousMovementAudio.Stop();
 		playerCamera.GetComponent<FollowPlayer>().enabled = false;
 	}
 
 	public void EnablePlayer()
 	{
 		playerCamera.GetComponent<FollowPlayer>().enabled = true;
-		StartCoroutine(PlayPlayerMovementAudio(0f));
+		playerStartMovementAudio.Play();
+		playerContinousMovementAudio.Play();
 		this.enabled = true;
 	}
 
@@ -180,13 +181,6 @@ public class PlayerController : MonoBehaviour
 	public void SetRespawnPos(Vector3 pos)
 	{
 		respawnPos = pos;
-	}
-
-	private IEnumerator PlayPlayerMovementAudio(float delay)
-	{
-		yield return new WaitForSeconds(delay);
-		AudioManager.Instance.Play("PlayerStartMovement");
-		AudioManager.Instance.Play("PlayerContinousMovement");
 	}
 
 	IEnumerator MoveCamera(float duration)

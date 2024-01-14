@@ -5,6 +5,8 @@ public class PlayerCollision : MonoBehaviour
     // A reference to the player's controller script.
     private PlayerController player;
 
+    [SerializeField] private AudioSource playerCrashAudio;
+
     // The particle effect that plays when we hit an obstacle.
     private ParticleSystem particleEffect;
 
@@ -24,7 +26,7 @@ public class PlayerCollision : MonoBehaviour
         // We check if the object we collided with has a tag called "Obstacle".
         if (collisionInfo.collider.CompareTag("Obstacle"))
         {
-            AudioManager.Instance.Play("PlayerCrash");       // Play the crash sound effect.
+            playerCrashAudio.Play();       // Play the crash sound effect.
             particleEffect.Play();    // Play the particle effect.
             player.HidePlayer();      // Hide the player.
             player.DisablePlayer();   // Disable the player.
