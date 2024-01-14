@@ -618,7 +618,6 @@ GameObject:
   - component: {fileID: 556853516}
   - component: {fileID: 556853515}
   - component: {fileID: 556853521}
-  - component: {fileID: 556853522}
   m_Layer: 5
   m_Name: LevelCompleteMenu
   m_TagString: Untagged
@@ -726,14 +725,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1915772a1767df04e96306fd546c2a04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!81 &556853522
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 556853513}
-  m_Enabled: 1
 --- !u!1 &749683735
 GameObject:
   m_ObjectHideFlags: 0

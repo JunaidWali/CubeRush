@@ -37,9 +37,9 @@ public class PlayerController : MonoBehaviour
 	private bool leftMoveRequest = false;
 	private bool isGrounded = true;
 
-	[SerializeField] private AudioSource playerStartMovementAudio;
-	[SerializeField] private AudioSource playerContinousMovementAudio;
-	[SerializeField] private AudioSource playerJumpAudio;
+	private AudioSource playerStartMovementAudio;
+	private AudioSource playerContinousMovementAudio;
+	private AudioSource playerJumpAudio;
 	private float targetPitch = 1f;
 
 	void Awake()
@@ -49,6 +49,10 @@ public class PlayerController : MonoBehaviour
 		respawnPos = rb.position;
 
 		playerCameraStartingPosition = playerCamera.transform.position;
+
+		playerStartMovementAudio = AudioManager.Instance.GetAudioSource("PlayerStartMovement");
+		playerContinousMovementAudio = AudioManager.Instance.GetAudioSource("PlayerContinousMovement");
+		playerJumpAudio = AudioManager.Instance.GetAudioSource("PlayerJump");
 	}
 
 	IEnumerator Start()

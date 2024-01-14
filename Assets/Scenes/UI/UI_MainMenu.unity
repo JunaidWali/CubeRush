@@ -503,7 +503,6 @@ GameObject:
   - component: {fileID: 1188701175}
   - component: {fileID: 1188701174}
   - component: {fileID: 1188701178}
-  - component: {fileID: 1188701179}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -590,7 +589,6 @@ RectTransform:
   - {fileID: 1705446326}
   - {fileID: 687864683}
   - {fileID: 1144601391}
-  - {fileID: 1732680056}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -610,14 +608,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66c35f0a7a6e4c74e8bdcfdcf37322d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!81 &1188701179
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1188701173}
-  m_Enabled: 1
 --- !u!1 &1372351721
 GameObject:
   m_ObjectHideFlags: 0
@@ -703,6 +693,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1420219377}
   - component: {fileID: 1420219378}
+  - component: {fileID: 1420219379}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -742,7 +733,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: dfd3574752c332246b1307e548a740f2, type: 3}
     loop: 1
     playOnAwake: 0
-    volume: 0.3
+    volume: 0.5
     pitch: 1
     source: {fileID: 0}
   - name: LevelTheme
@@ -773,6 +764,42 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     source: {fileID: 0}
+  - name: PlayerJump
+    clip: {fileID: 8300000, guid: 8154f5e18ea48164e9cb0132012cf432, type: 3}
+    loop: 0
+    playOnAwake: 0
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: PlayerStartMovement
+    clip: {fileID: 8300000, guid: 0470ffe2dac878047ba1eee586bd834c, type: 3}
+    loop: 0
+    playOnAwake: 0
+    volume: 0.8
+    pitch: 1
+    source: {fileID: 0}
+  - name: PlayerContinousMovement
+    clip: {fileID: 8300000, guid: b3024fad7fc03f144b22f592a7a19375, type: 3}
+    loop: 1
+    playOnAwake: 0
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: PlayerCrash
+    clip: {fileID: 8300000, guid: bddcb25502b410940b1f286fc805956f, type: 3}
+    loop: 0
+    playOnAwake: 0
+    volume: 0.8
+    pitch: 1
+    source: {fileID: 0}
+--- !u!81 &1420219379
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420219376}
+  m_Enabled: 1
 --- !u!1 &1511411939
 GameObject:
   m_ObjectHideFlags: 0
@@ -955,12 +982,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1732680053}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -959.99994, y: -540, z: 0}
-  m_LocalScale: {x: 0.8275862, y: 0.8275862, z: 0.8275862}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1188701177}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1934214184
 GameObject:
@@ -1079,3 +1106,4 @@ SceneRoots:
   - {fileID: 1511411941}
   - {fileID: 1420219377}
   - {fileID: 1188701177}
+  - {fileID: 1732680056}
