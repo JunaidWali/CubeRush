@@ -6,6 +6,7 @@ public class PlayerCollision : MonoBehaviour
     private PlayerController player;
 
     private AudioSource playerCrashAudio;
+    private AudioSource groundHitAudio;
 
     // The particle effect that plays when we hit an obstacle.
     private ParticleSystem particleEffect;
@@ -13,6 +14,7 @@ public class PlayerCollision : MonoBehaviour
     void Awake()
     {
         playerCrashAudio = AudioManager.Instance.GetAudioSource("PlayerCrash");
+        groundHitAudio = AudioManager.Instance.GetAudioSource("GroundHit");
     }
 
     void Start()
@@ -41,6 +43,7 @@ public class PlayerCollision : MonoBehaviour
         // We check if the object we collided with has a tag called "Ground".
         if (collisionInfo.collider.CompareTag("Ground"))
         {
+            groundHitAudio.Play();
             player.SetGrounded(true);
         }
     }
