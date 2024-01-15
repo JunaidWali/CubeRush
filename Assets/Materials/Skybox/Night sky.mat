@@ -86,7 +86,7 @@ Material:
     - _Metallic: 0
     - _MinStarSize: 0.57
     - _Mode: 0
-    - _MoonSize: 0.229
+    - _MoonSize: 0.437
     - _NoiseDensity: 4.8
     - _OcclusionStrength: 1
     - _Parallax: 0.02

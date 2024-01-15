@@ -5,7 +5,11 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
 
-    public Sound[] sounds;
+    public float levelThemeVolume = 0.3f;
+    public float levelThemeVolumeSilenced = 0.1f;
+
+    [SerializeField] private Sound[] sounds;
+
     void Awake()
     {
         if (Instance == null)
@@ -43,10 +47,48 @@ public class AudioManager : MonoBehaviour
         sound.source.Stop();
     }
 
+    public void StopAll()
+    {
+        foreach (Sound sound in sounds)
+        {
+            sound.source.Stop();
+        }
+    }
+
+    public void StopAllExcept(string name)
+    {
+        foreach (Sound sound in sounds)
+        {
+            if (sound.name != name)
+            {
+                sound.source.Stop();
+            }
+        }
+    }
+
     public void Pause(string name)
     {
         Sound sound = Array.Find(sounds, s => s.name == name);
         sound.source.Pause();
+    }
+
+    public void PauseAll()
+    {
+        foreach (Sound sound in sounds)
+        {
+            sound.source.Pause();
+        }
+    }
+
+    public void PauseAllExcept(string name)
+    {
+        foreach (Sound sound in sounds)
+        {
+            if (sound.name != name)
+            {
+                sound.source.Pause();
+            }
+        }
     }
 
     public void UnPause(string name)
@@ -55,39 +97,11 @@ public class AudioManager : MonoBehaviour
         sound.source.UnPause();
     }
 
-    public void PauseAll()
-    {
-        AudioSource[] allAudioSources = FindObjectsOfType<AudioSource>();
-        foreach (AudioSource audioSource in allAudioSources)
-        {
-            if (audioSource.isPlaying)
-            {
-                audioSource.Pause();
-            }
-        }
-    }
-
-    public void PauseAllExcept(string name)
-    {
-        PauseAll();
-        UnPause(name);
-    }
-
     public void UnPauseAll()
     {
-        AudioSource[] allAudioSources = FindObjectsOfType<AudioSource>();
-        foreach (AudioSource audioSource in allAudioSources)
+        foreach (Sound sound in sounds)
         {
-            audioSource.UnPause();
-        }
-    }
-
-    public void StopAll()
-    {
-        AudioSource[] allAudioSources = FindObjectsOfType<AudioSource>();
-        foreach (AudioSource audioSource in allAudioSources)
-        {
-            audioSource.Stop();
+            sound.source.UnPause();
         }
     }
 

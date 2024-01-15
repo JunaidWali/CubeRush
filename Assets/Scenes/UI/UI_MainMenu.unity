@@ -728,12 +728,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8c8af10bdfb3134f900fc64834d5a1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelThemeVolume: 0.3
+  levelThemeVolumeSilenced: 0.1
   sounds:
   - name: MainMenuTheme
     clip: {fileID: 8300000, guid: dfd3574752c332246b1307e548a740f2, type: 3}
     loop: 1
     playOnAwake: 0
-    volume: 0.5
+    volume: 0.3
     pitch: 1
     source: {fileID: 0}
   - name: LevelTheme
@@ -747,28 +749,28 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 8ddbb3cb406d045698e3f086efb20942, type: 3}
     loop: 0
     playOnAwake: 0
-    volume: 1
+    volume: 0.5
     pitch: 1
     source: {fileID: 0}
   - name: Pause
     clip: {fileID: 8300000, guid: 8e3acccd6b4314c4ca3dc81a29e0505f, type: 3}
     loop: 0
     playOnAwake: 0
-    volume: 1
+    volume: 0.5
     pitch: 1
     source: {fileID: 0}
   - name: Unpause
     clip: {fileID: 8300000, guid: 7f654842aaf974ca39064687927e7574, type: 3}
     loop: 0
     playOnAwake: 0
-    volume: 1
+    volume: 0.5
     pitch: 1
     source: {fileID: 0}
   - name: PlayerJump
     clip: {fileID: 8300000, guid: 8154f5e18ea48164e9cb0132012cf432, type: 3}
     loop: 0
     playOnAwake: 0
-    volume: 0.5
+    volume: 0.3
     pitch: 1
     source: {fileID: 0}
   - name: PlayerStartMovement
@@ -782,14 +784,21 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: b3024fad7fc03f144b22f592a7a19375, type: 3}
     loop: 1
     playOnAwake: 0
-    volume: 0.5
+    volume: 0.3
     pitch: 1
     source: {fileID: 0}
   - name: PlayerCrash
     clip: {fileID: 8300000, guid: bddcb25502b410940b1f286fc805956f, type: 3}
     loop: 0
     playOnAwake: 0
-    volume: 0.8
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: GroundHit
+    clip: {fileID: 8300000, guid: 0ee371361ed6eaf49bd8d957f8d8efb9, type: 3}
+    loop: 0
+    playOnAwake: 0
+    volume: 0.5
     pitch: 1
     source: {fileID: 0}
 --- !u!81 &1420219379

@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5521990804868939414}
@@ -118,7 +118,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1109301919913132}
   serializedVersion: 4
-  m_Mass: 1.2
+  m_Mass: 2
   m_Drag: 1
   m_AngularDrag: 2
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -135,7 +135,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 32
   m_CollisionDetection: 2
 --- !u!114 &5447925618827076843
 MonoBehaviour:
@@ -149,7 +149,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5df08099f45fcb4e8d82a9d0349cacf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCrashAudio: {fileID: 0}
 --- !u!114 &101964653249314452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,14 +166,11 @@ MonoBehaviour:
   playerCamera: {fileID: 0}
   restartDelay: 2
   forwardForce: 6000
-  sidewaysForce: 150
-  jumpForce: 3.35
+  sidewaysForce: 100
+  jumpForce: 7
   moveRightKey: 275
   moveLeftKey: 276
   jumpKey: 273
-  playerStartMovementAudio: {fileID: 0}
-  playerContinousMovementAudio: {fileID: 0}
-  playerJumpAudio: {fileID: 0}
 --- !u!1001 &8437568867778773887
 PrefabInstance:
   m_ObjectHideFlags: 0
