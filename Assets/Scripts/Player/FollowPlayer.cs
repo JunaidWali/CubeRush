@@ -3,8 +3,12 @@
 public class FollowPlayer : MonoBehaviour
 {
 
-	public Transform player;   // A variable that stores a reference to our Player
+	private Transform player;   // A variable that stores a reference to our Player
 	public Vector3 offset;      // A variable that allows us to offset the position (x, y, z)
+
+	void Start(){
+		player = transform.parent.Find("Player");
+	}
 
 	// Update is called once per frame
 	void Update()
