@@ -1,9 +1,13 @@
+using System.Collections;
 using UnityEngine;
 
 public class UI_PauseMenu : MonoBehaviour
 {
 
     private Canvas pauseMenu;
+    private UI_CountdownController countdownController;
+    private bool isGamePaused = false;
+    private bool isCountdownFinished = true;
 
     void Awake()
     {
@@ -12,13 +16,13 @@ public class UI_PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && isCountdownFinished)
         {
-            if (pauseMenu.enabled)
+            if (pauseMenu.enabled && isGamePaused)
             {
                 ResumeGame();
             }
-            else
+            else if (!pauseMenu.enabled && !isGamePaused)
             {
                 PauseGame();
             }
@@ -52,14 +56,25 @@ public class UI_PauseMenu : MonoBehaviour
         AudioManager.Instance.Play("Pause");
         Time.timeScale = 0f;
         pauseMenu.enabled = true;
+        isGamePaused = true;
     }
 
     public void ResumeGame()
     {
         pauseMenu.enabled = false;
+        isCountdownFinished = false;
+        countdownController = FindObjectOfType<UI_CountdownController>();
+        StartCoroutine(countdownController.CountdownToStart(OnCountdownFinished));
+    }
+
+    private void OnCountdownFinished()
+    {
         Time.timeScale = 1f;
         AudioManager.Instance.UnPauseAll();
         AudioManager.Instance.SetVolume("LevelTheme", AudioManager.Instance.levelThemeVolume);
         AudioManager.Instance.Play("Unpause");
+        isCountdownFinished = true; 
+        isGamePaused = false;
     }
+
 }
