@@ -26,7 +26,8 @@ public class GameManager : MonoBehaviour
     public enum LevelScene
     {
         Level01,
-        Level02
+        Level02,
+        Level03
     }
 
     public enum EnvironmentScene
