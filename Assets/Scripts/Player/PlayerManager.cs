@@ -36,6 +36,14 @@ public class PlayerManager : MonoBehaviour
 	protected AudioSource playerJumpAudio;
 	protected float targetPitch = 1f;
 
+	protected UI_PauseMenu pauseMenu;
+
+	private Vector3 storedVelocity;
+	private Vector3 storedAngularVelocity;
+	private bool justPaused = false;
+
+
+
 	protected virtual void Awake()
 	{
 		// We assign the Rigidbody component to our rb variable
@@ -56,6 +64,12 @@ public class PlayerManager : MonoBehaviour
 		playerCamera = transform.parent.Find("Camera").GetComponent<Camera>();
 		playerCameraStartingPosition = playerCamera.transform.position;
 
+		// We assign the pause menu component to our pauseMenu variable
+		pauseMenu = FindObjectOfType<UI_PauseMenu>();
+
+		storedAngularVelocity = Vector3.zero;
+		storedVelocity = Vector3.zero;
+
 		DisablePlayer();
 		yield return new WaitForSeconds(1f);
 		EnablePlayer();
@@ -65,36 +79,61 @@ public class PlayerManager : MonoBehaviour
 	// are using it to mess with physics.
 	void FixedUpdate()
 	{
-		// Add a forward force
-		rb.AddForce(0, 0, forwardForce * Time.deltaTime);
-
-		if (rightMoveRequest)
+		if (!pauseMenu.isGamePaused)
 		{
-			// Add a force to the right
-			rb.AddForce(sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
-			rightMoveRequest = false;
+			if (justPaused)
+			{
+				rb.velocity = storedVelocity;
+				rb.angularVelocity = storedAngularVelocity;
+				rb.freezeRotation = false;
+				rb.useGravity = true;
+				justPaused = false;
+			}
+
+			// Add a forward force
+			rb.AddForce(0, 0, forwardForce * Time.deltaTime);
+
+			if (rightMoveRequest)
+			{
+				// Add a force to the right
+				rb.AddForce(sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+				rightMoveRequest = false;
+			}
+
+			if (leftMoveRequest)
+			{
+				// Add a force to the left
+				rb.AddForce(-sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+				leftMoveRequest = false;
+			}
+
+			if (isGrounded && jumpRequest)
+			{
+				// Add a force to jump upwards
+				rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
+				jumpRequest = false;
+				isGrounded = false;
+			}
+
+			if (rb.position.y < -3f)
+			{
+				DisablePlayer();
+				HidePlayer();
+				StartCoroutine(RestartFromCheckpoint(1f));
+			}
 		}
-
-		if (leftMoveRequest)
+		else
 		{
-			// Add a force to the left
-			rb.AddForce(-sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
-			leftMoveRequest = false;
-		}
-
-		if (isGrounded && jumpRequest)
-		{
-			// Add a force to jump upwards
-			rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
-			jumpRequest = false;
-			isGrounded = false;
-		}
-
-		if (rb.position.y < -3f)
-		{
-			DisablePlayer();
-			HidePlayer();
-			StartCoroutine(RestartFromCheckpoint(1f));
+			if (!justPaused)
+			{
+				storedVelocity = rb.velocity;
+				storedAngularVelocity = rb.angularVelocity;
+				rb.velocity = Vector3.zero;
+				rb.angularVelocity = Vector3.zero;
+				rb.freezeRotation = true;
+				rb.useGravity = false;
+				justPaused = true;
+			}
 		}
 	}
 

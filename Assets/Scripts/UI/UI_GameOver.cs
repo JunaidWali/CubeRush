@@ -6,7 +6,7 @@ public class UI_GameOver : MonoBehaviour
     {
         AudioManager.Instance.StopAll();
         AudioManager.Instance.Play("ButtonClick");
-        GameManager.Instance.LoadUI(GameManager.UIScene.UI_MainMenu);
+        StartCoroutine(GameManager.Instance.LoadUI(GameManager.UIScene.UI_MainMenu));
     }
 
     public void QuitGameButton()

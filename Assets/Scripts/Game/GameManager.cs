@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         Space
     }
 
-    [SerializeField] private Animator transition;
+    [SerializeField] private Animation sceneTransition;
     private readonly float transitionTime = 0.5f;
 
     private int activeSceneIndex;
@@ -62,8 +62,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGameAs()
     {
-        string startAnimTrigger = CurrentGameMode == GameMode.SinglePlayer ? "Start_SP_Load" : "Start_MP_Load";
-        StartCoroutine(LoadStartUpScenes(startAnimTrigger, LevelScene.Level01, EnvironmentScene.Space, "Load_Level"));
+        StartCoroutine(LoadStartUpScenes(LevelScene.Level01, EnvironmentScene.Space));
     }
 
     public void LoadNextLevel()
@@ -72,11 +71,11 @@ public class GameManager : MonoBehaviour
         string nextSceneName = GetSceneName(nextSceneIndex);
         if (Enum.TryParse(nextSceneName, out LevelScene nextLevel))
         {
-            StartCoroutine(LoadStartUpScenes("Start_NextLevel_Load", nextLevel, EnvironmentScene.Space, "Load_Level"));
+            StartCoroutine(LoadStartUpScenes(nextLevel, EnvironmentScene.Space));
         }
         else
         {
-            LoadUI(UIScene.UI_GameOver);
+            StartCoroutine(LoadUI(UIScene.UI_GameOver));
         }
     }
 
@@ -84,7 +83,7 @@ public class GameManager : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(activeSceneName.ToString()))
         {
-            yield return StartCoroutine(UnloadSceneIfLoaded(activeSceneName.ToString()));
+            yield return StartCoroutine(UnloadSceneIfLoaded(activeSceneName));
         }
 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(levelName.ToString(), LoadSceneMode.Additive);
@@ -107,64 +106,58 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void LoadUI(UIScene UI_SceneName)
+    public IEnumerator LoadUI(UIScene UI_SceneName)
     {
-        StartCoroutine(LoadSceneWithTransition($"Start_{UI_SceneName}_Load", UI_SceneName.ToString(), $"Load_{UI_SceneName}"));
+        sceneTransition.Play("FadeIn");
+        yield return new WaitForSecondsRealtime(transitionTime);
+        SceneManager.LoadSceneAsync(UI_SceneName.ToString());
+        sceneTransition.Play("FadeOut");
     }
 
     public void RestartLevel()
     {
-        StartCoroutine(LoadStartUpScenes("Start_Restart_Load", activeSceneName, EnvironmentScene.Space, "Load_Level"));
+        StartCoroutine(LoadStartUpScenes(activeSceneName, EnvironmentScene.Space));
     }
 
-    private IEnumerator LoadStartUpScenes(string startAnimTrigger, LevelScene levelName, EnvironmentScene environmentName, string endAnimTrigger)
+    private IEnumerator LoadStartUpScenes(LevelScene levelName, EnvironmentScene environmentName)
     {
-        transition.SetTrigger(startAnimTrigger);
+        sceneTransition.Play("FadeIn");
         yield return new WaitForSecondsRealtime(transitionTime);
 
         // Unload if loaded and then load environment
-        yield return StartCoroutine(UnloadSceneIfLoaded(environmentName.ToString()));
+        yield return StartCoroutine(UnloadSceneIfLoaded(environmentName));
         yield return SceneManager.LoadSceneAsync(environmentName.ToString(), LoadSceneMode.Additive);
 
         // Unload Main-Menu if loaded
-        StartCoroutine(UnloadSceneIfLoaded(UIScene.UI_MainMenu.ToString()));
+        StartCoroutine(UnloadSceneIfLoaded(UIScene.UI_MainMenu));
 
         // Unload Level-Complete if loaded
-        StartCoroutine(UnloadSceneIfLoaded(UIScene.UI_LevelComplete.ToString()));
+        StartCoroutine(UnloadSceneIfLoaded(UIScene.UI_LevelComplete));
 
         // Unload and then load game mode
         yield return StartCoroutine(LoadGameModeScene());
 
         // Unload if loaded and then load level
-        yield return StartCoroutine(UnloadSceneIfLoaded(levelName.ToString()));
+        yield return StartCoroutine(UnloadSceneIfLoaded(levelName));
         yield return StartCoroutine(LoadLevel(levelName));
 
-        transition.SetTrigger(endAnimTrigger);
-        Time.timeScale = 1f;
+        sceneTransition.Play("FadeOut");
     }
 
     private IEnumerator LoadGameModeScene()
     {
         GameModeScene gameModeScene = CurrentGameMode == GameMode.SinglePlayer ? GameModeScene.SP_GameMode : GameModeScene.MP_GameMode;
 
-        yield return StartCoroutine(UnloadSceneIfLoaded(gameModeScene.ToString()));
+        yield return StartCoroutine(UnloadSceneIfLoaded(gameModeScene));
         yield return SceneManager.LoadSceneAsync(gameModeScene.ToString(), LoadSceneMode.Additive);
     }
 
-    private IEnumerator UnloadSceneIfLoaded(string SceneName)
+    private IEnumerator UnloadSceneIfLoaded<T>(T SceneName) where T : Enum
     {
-        if (SceneManager.GetSceneByName(SceneName).isLoaded)
+        if (SceneManager.GetSceneByName(SceneName.ToString()).isLoaded)
         {
-            yield return SceneManager.UnloadSceneAsync(SceneName);
+            yield return SceneManager.UnloadSceneAsync(SceneName.ToString());
         }
-    }
-
-    public IEnumerator LoadSceneWithTransition(string startAnimTrigger, string sceneName, string endAnimTrigger)
-    {
-        transition.SetTrigger(startAnimTrigger);
-        yield return new WaitForSecondsRealtime(transitionTime);
-        yield return SceneManager.LoadSceneAsync(sceneName);
-        transition.SetTrigger(endAnimTrigger);
     }
 
     public string GetSceneName(int buildIndex)

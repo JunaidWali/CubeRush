@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UI_CountdownController : MonoBehaviour
 {
@@ -32,7 +31,7 @@ public class UI_CountdownController : MonoBehaviour
 
         countdownDisplay.text = "GO!";
 
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(0.3f);
 
         countdownDisplay.gameObject.SetActive(false);
 
