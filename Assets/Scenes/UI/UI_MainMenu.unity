@@ -838,7 +838,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebdda0c75e29bba42af36dad5d866c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transition: {fileID: 1934214186}
+  sceneTransition: {fileID: 1934214190}
 --- !u!4 &1511411941
 Transform:
   m_ObjectHideFlags: 0
@@ -1010,9 +1010,9 @@ GameObject:
   - component: {fileID: 1934214189}
   - component: {fileID: 1934214188}
   - component: {fileID: 1934214187}
-  - component: {fileID: 1934214186}
+  - component: {fileID: 1934214190}
   m_Layer: 5
-  m_Name: Animator
+  m_Name: SceneTransition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1037,27 +1037,6 @@ RectTransform:
   m_AnchoredPosition: {x: -347.3793, y: 273.51724}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0}
---- !u!95 &1934214186
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1934214184}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 99dbff6cb6e02b24db93506866768d6a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 2
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!225 &1934214187
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1108,6 +1087,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1934214184}
   m_CullTransparentMesh: 1
+--- !u!111 &1934214190
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934214184}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 99aec240443674048a9a4120287bf286, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 99aec240443674048a9a4120287bf286, type: 2}
+  - {fileID: 7400000, guid: 7ed30cbe6ffc4424e911af06986a896c, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

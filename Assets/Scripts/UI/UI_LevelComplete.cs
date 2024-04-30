@@ -27,6 +27,6 @@ public class UI_LevelComplete : MonoBehaviour
         AudioManager.Instance.StopAll();
         AudioManager.Instance.SetVolume("LevelTheme", AudioManager.Instance.levelThemeVolume);
         AudioManager.Instance.Play("ButtonClick");
-        GameManager.Instance.LoadUI(GameManager.UIScene.UI_MainMenu);
+        StartCoroutine(GameManager.Instance.LoadUI(GameManager.UIScene.UI_MainMenu));
     }
 }

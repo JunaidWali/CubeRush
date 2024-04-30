@@ -51,26 +51,30 @@ public class AIController : PlayerManager
 
     void Update()
     {
-        if (!jumpRequest)
+        if (!pauseMenu.isGamePaused)
         {
-            // Check if there is an obstacle in front of the player.
-            if (IfObstacleForward())
+            if (!jumpRequest)
             {
-                // Avoid obstacle maneuver.
-                AvoidObstacle();
-            }
-            else
-            {
-                // There is no obstacle in front of the player, so move forward.
-                MoveForward();
-            }
+                // Check if there is an obstacle in front of the player.
+                if (IfObstacleForward())
+                {
+                    // Avoid obstacle maneuver.
+                    AvoidObstacle();
+                }
+                else
+                {
+                    // There is no obstacle in front of the player, so move forward.
+                    MoveForward();
+                }
 
-            StayWithinBounds();
+                StayWithinBounds();
+            }
+            // left.GetComponent<TextMeshProUGUI>().enabled = moveDirection == 0;
+            // right.GetComponent<TextMeshProUGUI>().enabled = moveDirection == 1;
+            // forward.GetComponent<TextMeshProUGUI>().enabled = moveDirection == null;
         }
-        // left.GetComponent<TextMeshProUGUI>().enabled = moveDirection == 0;
-        // right.GetComponent<TextMeshProUGUI>().enabled = moveDirection == 1;
-        // forward.GetComponent<TextMeshProUGUI>().enabled = moveDirection == null;
     }
+        
 
     private bool IfObstacleForward()
     {

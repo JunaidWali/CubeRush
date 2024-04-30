@@ -9,35 +9,38 @@ public class PlayerController : PlayerManager
 
 	void Update()
 	{
-		if (Input.GetKey(moveRightKey))
+		if (!pauseMenu.isGamePaused)
 		{
-			rightMoveRequest = true;
-		}
-
-		if (Input.GetKey(moveLeftKey))
-		{
-			leftMoveRequest = true;
-		}
-
-		if (Input.GetKeyDown(jumpKey))
-		{
-			if (isGrounded)
+			if (Input.GetKey(moveRightKey))
 			{
-				playerJumpAudio.Play();
-				jumpRequest = true;
+				rightMoveRequest = true;
 			}
-		}
 
-		if (Input.GetKeyDown(moveRightKey) || Input.GetKeyDown(moveLeftKey))
-		{
-			targetPitch = 1.3f;
-		}
+			if (Input.GetKey(moveLeftKey))
+			{
+				leftMoveRequest = true;
+			}
 
-		if (Input.GetKeyUp(moveRightKey) || Input.GetKeyUp(moveLeftKey))
-		{
-			targetPitch = 1f;
-		}
+			if (Input.GetKeyDown(jumpKey))
+			{
+				if (isGrounded)
+				{
+					playerJumpAudio.Play();
+					jumpRequest = true;
+				}
+			}
 
-		playerContinousMovementAudio.pitch = Mathf.Lerp(playerContinousMovementAudio.pitch, targetPitch, Time.deltaTime * 10);
+			if (Input.GetKeyDown(moveRightKey) || Input.GetKeyDown(moveLeftKey))
+			{
+				targetPitch = 1.3f;
+			}
+
+			if (Input.GetKeyUp(moveRightKey) || Input.GetKeyUp(moveLeftKey))
+			{
+				targetPitch = 1f;
+			}
+
+			playerContinousMovementAudio.pitch = Mathf.Lerp(playerContinousMovementAudio.pitch, targetPitch, Time.deltaTime * 10);
+		}
 	}
 }
