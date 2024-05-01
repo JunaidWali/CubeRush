@@ -1,11 +1,20 @@
+using TMPro;
 using UnityEngine;
 
 public class UI_LevelComplete : MonoBehaviour
 {
+    private string winnerName;
+    [SerializeField] private TextMeshProUGUI winnerText;
+
+    void Awake()
+    {
+        winnerName = GameObject.Find("END").GetComponent<LevelComplete>().playerName;
+    }
     void Start()
     {
         AudioManager.Instance.StopAllExcept("LevelTheme");
         AudioManager.Instance.SetVolume("LevelTheme", AudioManager.Instance.levelThemeVolumeSilenced);
+        winnerText.text = winnerName + " WINS!";
     }
 
     public void OnRestartLevelButtonClick()
