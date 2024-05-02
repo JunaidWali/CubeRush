@@ -78,7 +78,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 644b4f59373df33438211a21e78dd01d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endTransition: {fileID: 9046337752381911549}
   endCamera: {fileID: 3169895035176517686}
 --- !u!1 &1794249355417147604
 GameObject:
@@ -294,7 +293,7 @@ GameObject:
   - component: {fileID: 2603205534786497574}
   - component: {fileID: 9046337752381911549}
   m_Layer: 0
-  m_Name: Camera
+  m_Name: EndTransitionCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

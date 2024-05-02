@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGameAs()
     {
-        StartCoroutine(LoadStartUpScenes(LevelScene.Level01, EnvironmentScene.Space));
+        StartCoroutine(LoadStartUpScenes(LevelScene.Level03, EnvironmentScene.Space));
     }
 
     public void LoadNextLevel()
