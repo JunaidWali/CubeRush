@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
 
     private int activeSceneIndex;
     private LevelScene activeSceneName;
+    public bool isLevelCompleted = false;
 
     void Awake()
     {

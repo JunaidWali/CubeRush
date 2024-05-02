@@ -43,7 +43,6 @@ public class PlayerManager : MonoBehaviour
 	private bool justPaused = false;
 
 
-
 	protected virtual void Awake()
 	{
 		// We assign the Rigidbody component to our rb variable
@@ -71,7 +70,7 @@ public class PlayerManager : MonoBehaviour
 		storedVelocity = Vector3.zero;
 
 		DisablePlayer();
-		yield return new WaitForSeconds(1f);
+		yield return new WaitForSeconds(9f);
 		EnablePlayer();
 	}
 

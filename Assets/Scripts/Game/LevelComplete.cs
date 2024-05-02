@@ -4,20 +4,25 @@ using UnityEngine.SceneManagement;
 
 public class LevelComplete : MonoBehaviour
 {
-	[SerializeField] private Animation endTransition;
+	private Animation endTransition;
 	[SerializeField] private Camera endCamera;
 
-	private bool hasTriggered = false;
-	public string playerName;
+	[NonSerialized] public string playerName;
+	[NonSerialized] public int playerPlacement = 0;
+
+	void Awake()
+	{
+		endTransition = endCamera.GetComponent<Animation>();
+	}
 
 	void OnTriggerEnter(Collider player)
 	{
-		if (!hasTriggered)
+		playerPlacement++;
+		if (!GameManager.Instance.isLevelCompleted && player.CompareTag("Player"))
 		{
+			GameManager.Instance.isLevelCompleted = true;
 			GameObject.Find("EventSystem").SetActive(false);
-			hasTriggered = true;
 			playerName = player.GetComponentInChildren<PlayerManager>().playerName;
-			endCamera.enabled = true;
 			endTransition.Play("LevelComplete");
 			LoadLevelComplete();
 		}
