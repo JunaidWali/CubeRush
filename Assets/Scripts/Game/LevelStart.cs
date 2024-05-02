@@ -9,5 +9,8 @@ public class LevelStart : MonoBehaviour
         {
             AudioManager.Instance.PlayDelayed("LevelTheme", 2f);
         }
+
+        GameManager.Instance.isLevelCompleted = false;
+
     }
 }

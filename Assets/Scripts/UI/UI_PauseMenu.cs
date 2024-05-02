@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UI_PauseMenu : MonoBehaviour
 {
@@ -15,15 +16,18 @@ public class UI_PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && isCountdownFinished)
+        if (!GameManager.Instance.isLevelCompleted)
         {
-            if (pauseMenu.enabled && isGamePaused)
+            if (Input.GetKeyDown(KeyCode.Escape) && isCountdownFinished)
             {
-                ResumeGame();
-            }
-            else if (!pauseMenu.enabled && !isGamePaused)
-            {
-                PauseGame();
+                if (pauseMenu.enabled && isGamePaused)
+                {
+                    ResumeGame();
+                }
+                else if (!pauseMenu.enabled && !isGamePaused)
+                {
+                    PauseGame();
+                }
             }
         }
     }

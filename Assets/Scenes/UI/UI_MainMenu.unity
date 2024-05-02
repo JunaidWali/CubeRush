@@ -839,6 +839,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneTransition: {fileID: 1934214190}
+  isLevelCompleted: 0
 --- !u!4 &1511411941
 Transform:
   m_ObjectHideFlags: 0
