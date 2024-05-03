@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8044425437582553265}
-  - component: {fileID: 5194371341934098934}
+  - component: {fileID: 1274276159400255046}
   m_Layer: 0
   m_Name: TwoBlockObstacle
   m_TagString: Untagged
@@ -34,22 +34,20 @@ Transform:
   - {fileID: 4716548605981615152}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &5194371341934098934
-Animation:
+--- !u!114 &1274276159400255046
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5927215966684085115}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 70b4d9b11bdddf6418562c6e7cffa965, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 70b4d9b11bdddf6418562c6e7cffa965, type: 2}
-  m_WrapMode: 4
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d403b9abf3542e045bf27a27235e1d6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minSpeed: 2
+  maxSpeed: 5
 --- !u!1001 &4711945767000829614
 PrefabInstance:
   m_ObjectHideFlags: 0
