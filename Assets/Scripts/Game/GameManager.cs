@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
         Level01,
         Level02,
         Level03,
-        Level04
+        Level04Test
     }
 
     public enum EnvironmentScene
@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGameAs()
     {
-        StartCoroutine(LoadStartUpScenes(LevelScene.Level03, EnvironmentScene.Space));
+        StartCoroutine(LoadStartUpScenes(LevelScene.Level01, EnvironmentScene.Space));
     }
 
     public void LoadNextLevel()
