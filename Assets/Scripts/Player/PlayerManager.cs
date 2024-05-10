@@ -36,9 +36,10 @@ public class PlayerManager : MonoBehaviour
 	protected bool isGrounded = true;
 	protected bool boostRequest = false;
 
-	protected AudioSource playerStartMovementAudio;
-	protected AudioSource playerContinousMovementAudio;
-	protected AudioSource playerJumpAudio;
+	[SerializeField] protected AudioSource playerStartMovementAudio;
+	[SerializeField] protected AudioSource playerContinousMovementAudio;
+	[SerializeField] protected AudioSource playerJumpAudio;
+
 	protected float targetPitch = 1f;
 
 	protected UI_PauseMenu pauseMenu;
@@ -47,16 +48,11 @@ public class PlayerManager : MonoBehaviour
 	private Vector3 storedAngularVelocity;
 	private bool justPaused = false;
 
-
 	protected virtual void Awake()
 	{
 		// We assign the Rigidbody component to our rb variable
 		rb = GetComponent<Rigidbody>();
 		respawnPos = rb.position;
-
-		playerStartMovementAudio = AudioManager.Instance.GetAudioSource("PlayerStartMovement");
-		playerContinousMovementAudio = AudioManager.Instance.GetAudioSource("PlayerContinousMovement");
-		playerJumpAudio = AudioManager.Instance.GetAudioSource("PlayerJump");
 	}
 
 	IEnumerator Start()

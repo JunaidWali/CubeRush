@@ -882,21 +882,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4645271193828249869, guid: f7b8387cc37bda94098ac7875034e696,
-        type: 3}
-      propertyPath: jumpKey
-      value: 32
-      objectReference: {fileID: 0}
-    - target: {fileID: 4645271193828249869, guid: f7b8387cc37bda94098ac7875034e696,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5822836838174492088, guid: f7b8387cc37bda94098ac7875034e696,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7192278816052021007, guid: f7b8387cc37bda94098ac7875034e696,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -906,11 +891,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8079430150150740945, guid: f7b8387cc37bda94098ac7875034e696,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

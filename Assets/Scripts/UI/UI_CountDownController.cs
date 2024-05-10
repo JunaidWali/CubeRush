@@ -7,6 +7,14 @@ public class UI_CountdownController : MonoBehaviour
 {
     private int countdownTime;
     public TextMeshProUGUI countdownDisplay;
+    private AudioSource countdownNumberAudio;
+    private AudioSource countdownGoAudio;
+
+    void Awake()
+    {
+        countdownNumberAudio = AudioManager.Instance.GetSource("CountdownNumber");
+        countdownGoAudio = AudioManager.Instance.GetSource("CountdownGO");
+    }
 
     private void Start()
     {
@@ -22,7 +30,7 @@ public class UI_CountdownController : MonoBehaviour
         while (countdownTime > 0)
         {
             countdownDisplay.text = countdownTime.ToString();
-            AudioManager.Instance.Play("Countdown Number");
+            countdownNumberAudio.Play();
 
             yield return new WaitForSecondsRealtime(1f);
 
@@ -30,7 +38,7 @@ public class UI_CountdownController : MonoBehaviour
         }
 
         countdownDisplay.text = "GO!";
-        AudioManager.Instance.Play("Countdown GO");
+        countdownGoAudio.Play();
 
         yield return new WaitForSecondsRealtime(0.5f);
 
@@ -48,7 +56,7 @@ public class UI_CountdownController : MonoBehaviour
         while (countdownTime > 0)
         {
             countdownDisplay.text = countdownTime.ToString();
-            AudioManager.Instance.Play("Countdown Number");
+            countdownNumberAudio.Play();
 
             yield return new WaitForSecondsRealtime(1f);
 
@@ -56,7 +64,7 @@ public class UI_CountdownController : MonoBehaviour
         }
 
         countdownDisplay.text = "GO!";
-        AudioManager.Instance.Play("Countdown GO");
+        countdownGoAudio.Play();
 
         yield return new WaitForSecondsRealtime(0.5f);
         countdownDisplay.gameObject.SetActive(false);

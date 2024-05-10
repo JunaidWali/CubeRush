@@ -6,17 +6,21 @@ public class UI_LevelComplete : MonoBehaviour
     private string winnerName;
     private int winnerPlacement;
     [SerializeField] private TextMeshProUGUI winnerText;
+    private AudioSource levelThemeAudio;
+    private AudioSource buttonClickAudio;
 
 
     void Awake()
     {
         winnerName = GameObject.Find("END").GetComponent<LevelComplete>().playerName;
         winnerPlacement = GameObject.Find("END").GetComponent<LevelComplete>().playerPlacement;
+        levelThemeAudio = AudioManager.Instance.GetSource("LevelTheme");
+        buttonClickAudio = AudioManager.Instance.GetSource("ButtonClick");
     }
     void Start()
     {
         AudioManager.Instance.StopAllExcept("LevelTheme");
-        AudioManager.Instance.SetVolume("LevelTheme", AudioManager.Instance.levelThemeVolumeSilenced);
+        levelThemeAudio.volume = AudioManager.Instance.silencedVolume;
         switch (winnerPlacement)
         {
             case 1:
@@ -36,23 +40,23 @@ public class UI_LevelComplete : MonoBehaviour
 
     public void OnRestartLevelButtonClick()
     {
-        AudioManager.Instance.SetVolume("LevelTheme", AudioManager.Instance.levelThemeVolume);
-        AudioManager.Instance.Play("ButtonClick");
+        levelThemeAudio.volume = AudioManager.Instance.defaultVolume;
+        buttonClickAudio.Play();
         GameManager.Instance.RestartLevel();
     }
 
     public void OnNextLevelButtonClick()
     {
-        AudioManager.Instance.SetVolume("LevelTheme", AudioManager.Instance.levelThemeVolume);
-        AudioManager.Instance.Play("ButtonClick");
+        levelThemeAudio.volume = AudioManager.Instance.defaultVolume;
+        buttonClickAudio.Play();
         GameManager.Instance.LoadNextLevel();
     }
 
     public void OnMainMenuButtonClick()
     {
         AudioManager.Instance.StopAll();
-        AudioManager.Instance.SetVolume("LevelTheme", AudioManager.Instance.levelThemeVolume);
-        AudioManager.Instance.Play("ButtonClick");
+        levelThemeAudio.volume = AudioManager.Instance.defaultVolume;
+        buttonClickAudio.Play();
         StartCoroutine(GameManager.Instance.LoadUI(GameManager.UIScene.UI_MainMenu));
     }
 }

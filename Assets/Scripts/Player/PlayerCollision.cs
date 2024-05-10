@@ -6,19 +6,13 @@ public class PlayerCollision : MonoBehaviour
     // A reference to the player's controller script.
     private PlayerManager player;
 
-    private AudioSource playerCrashAudio;
-    private AudioSource groundHitAudio;
+    [SerializeField] private AudioSource playerCrashAudio;
+    [SerializeField] private AudioSource playerGroundHitAudio;
 
     // The particle effect that plays when we hit an obstacle.
     private ParticleSystem particleEffect;
 
     private readonly HashSet<string> obstacleTags = new() { "Obstacle", "LowBar" };
-
-    void Awake()
-    {
-        playerCrashAudio = AudioManager.Instance.GetAudioSource("PlayerCrash");
-        groundHitAudio = AudioManager.Instance.GetAudioSource("GroundHit");
-    }
 
     void Start()
     {
@@ -46,8 +40,7 @@ public class PlayerCollision : MonoBehaviour
         // We check if the object we collided with has a tag called "Ground".
         if (collisionInfo.collider.CompareTag("Ground"))
         {
-            groundHitAudio.Play();
-            // player.jump.GetComponent<TextMeshProUGUI>().enabled = false;
+            playerGroundHitAudio.Play();
             player.SetGrounded(true);
         }
     }
