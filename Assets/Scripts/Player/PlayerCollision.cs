@@ -57,8 +57,15 @@ public class PlayerCollision : MonoBehaviour
         // We check if the object we collided with has a tag called "Ground".
         if (collisionInfo.collider.CompareTag("Ground"))
         {
-            // player.jump.GetComponent<TextMeshProUGUI>().enabled = true;
             player.SetGrounded(false);
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Obstacle"))
+        {
+            player.boostLevel += 20;
         }
     }
 }

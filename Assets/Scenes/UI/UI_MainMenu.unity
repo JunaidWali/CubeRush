@@ -801,6 +801,20 @@ MonoBehaviour:
     volume: 0.5
     pitch: 1
     source: {fileID: 0}
+  - name: Countdown Number
+    clip: {fileID: 8300000, guid: 6c23de2b6aaed704cb0aebd8de468a46, type: 3}
+    loop: 0
+    playOnAwake: 0
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: Countdown GO
+    clip: {fileID: 8300000, guid: 642925feae63ca54f96ab55afeb02ad5, type: 3}
+    loop: 0
+    playOnAwake: 0
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
 --- !u!81 &1420219379
 AudioListener:
   m_ObjectHideFlags: 0

@@ -1,18 +1,12 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class UI_PauseMenu : MonoBehaviour
 {
 
-    private Canvas pauseMenu;
-    private UI_CountdownController countdownController;
+    [SerializeField] private Canvas pauseMenu;
+    [SerializeField] private UI_CountdownController countdownController;
     public bool isGamePaused = false;
-    private bool isCountdownFinished = true;
-
-    void Awake()
-    {
-        pauseMenu = GetComponent<Canvas>();
-    }
+    public bool isCountdownFinished = false;
 
     void Update()
     {
@@ -65,7 +59,6 @@ public class UI_PauseMenu : MonoBehaviour
     {
         pauseMenu.enabled = false;
         isCountdownFinished = false;
-        countdownController = FindObjectOfType<UI_CountdownController>();
         StartCoroutine(countdownController.CountdownToStart(OnCountdownFinished));
     }
 
@@ -74,7 +67,7 @@ public class UI_PauseMenu : MonoBehaviour
         AudioManager.Instance.UnPauseAll();
         AudioManager.Instance.SetVolume("LevelTheme", AudioManager.Instance.levelThemeVolume);
         AudioManager.Instance.Play("Unpause");
-        isCountdownFinished = true; 
+        isCountdownFinished = true;
         isGamePaused = false;
     }
 }

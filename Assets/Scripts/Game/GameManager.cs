@@ -28,7 +28,8 @@ public class GameManager : MonoBehaviour
         Level01,
         Level02,
         Level03,
-        Level04Test
+        Level04,
+        Level05
     }
 
     public enum EnvironmentScene
