@@ -1,15 +1,20 @@
-using System.Collections;
+using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ObstacleMovement : MonoBehaviour
 {
-    public float minSpeed = 2.0f;
-    public float maxSpeed = 5.0f;
-    private float speed;
-    private float minX = -4.4f;
-    private float maxX = 6.4f;
-    private float direction = 1.0f;
+    [SerializeField] private float minSpeed;
+    [SerializeField] private float maxSpeed;
+    [NonSerialized] private float speed;
+    [NonSerialized] private readonly float minX = -4.4f;
+    [NonSerialized] private readonly float maxX = 6.4f;
+
+    [NonSerialized] private readonly float minY = 0.6f;
+    [NonSerialized] private readonly float maxY = 3.35f;
+
+    [NonSerialized] private float direction;
+
+    [NonSerialized] private float currVector;
 
     private Vector3 startPosition;
 
@@ -17,47 +22,63 @@ public class ObstacleMovement : MonoBehaviour
     void Start()
     {
         startPosition = transform.position;
-        StartCoroutine(ChangeDirectionAndSpeed());
+        speed = UnityEngine.Random.Range(minSpeed, maxSpeed);
+        if (startPosition.x > (minX + maxX) / 2) direction = -1.0f;
+        else direction = 1.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Calculate the new position
-        float newX = transform.position.x + (Time.deltaTime * speed * direction);
 
-        // If the new position has reached either minX or maxX, change the direction
-        if (newX <= minX || newX >= maxX)
+        if (gameObject.CompareTag("Obstacle"))
         {
-            direction *= -1;
-            newX = transform.position.x + (Time.deltaTime * speed * direction); // Recalculate newX with the new direction
+            currVector = transform.position.x + (Time.deltaTime * speed * direction);
+            if (currVector <= minX || currVector >= maxX)
+            {
+                ChangeDirection();
+            }
+            UpdatePosition(minX, maxX, currVector, startPosition.y, startPosition.z);
         }
 
-        // Clamp the new x position to be within the platform
-        newX = Mathf.Clamp(newX, minX, maxX);
-
-        // Update the position
-        transform.position = new Vector3(newX, startPosition.y, startPosition.z);
+        else if (gameObject.CompareTag("LowBar"))
+        {
+            currVector = transform.position.y + (Time.deltaTime * speed * direction);
+            if (currVector <= minY || currVector >= maxY)
+            {
+                ChangeDirection();
+            }
+            UpdatePosition(minY, maxY, startPosition.x, currVector, startPosition.z);
+        }
     }
 
-    IEnumerator ChangeDirectionAndSpeed()
+
+    void ChangeDirection()
     {
-        while (true)
+        if ((currVector <= minX && direction < 0) ||
+            (currVector >= maxX && direction > 0) ||
+            (currVector <= minY && direction < 0) ||
+            (currVector >= maxY && direction > 0))
         {
-            // Wait for a random amount of time between 1 and 5 seconds
-            yield return new WaitForSeconds(Random.Range(1.0f, 3.0f));
+            direction *= -1;
+            speed = UnityEngine.Random.Range(minSpeed, maxSpeed);
+        }
+    }
 
-            // Get the current scene's name
-            string sceneName = SceneManager.GetActiveScene().name;
-            
-            // If the scene name does not contain "03", change the direction
-            if (!sceneName.Contains("03"))
-            {
-                direction *= -1;
-            }
+    void UpdatePosition(float min, float max, float x, float y, float z)
+    {
+        // Clamp the new position to be within the range
+        currVector = Mathf.Clamp(currVector, min, max);
+        // Update the position
+        transform.position = new Vector3(x, y, z);
+    }
 
-            // Change the speed to a random value between 0.1 and 2.0
-            speed = Random.Range(minSpeed, maxSpeed);
+    void OnCollisionEnter(Collision collisionInfo)
+    {
+        if (collisionInfo.collider.CompareTag("Obstacle"))
+        {
+            direction *= -1;
+            speed = UnityEngine.Random.Range(minSpeed, maxSpeed);
         }
     }
 }

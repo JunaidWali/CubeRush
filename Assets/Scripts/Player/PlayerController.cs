@@ -6,6 +6,7 @@ public class PlayerController : PlayerManager
 	[SerializeField] private KeyCode moveRightKey = KeyCode.RightArrow; // Default key for moving right
 	[SerializeField] private KeyCode moveLeftKey = KeyCode.LeftArrow;   // Default key for moving left
 	[SerializeField] private KeyCode jumpKey = KeyCode.UpArrow;         // Default key for jumping
+	[SerializeField] private KeyCode boostKey = KeyCode.Space;          // Default key for boosting
 
 	void Update()
 	{
@@ -28,6 +29,10 @@ public class PlayerController : PlayerManager
 					playerJumpAudio.Play();
 					jumpRequest = true;
 				}
+			}
+			if (Input.GetKey(boostKey) && boostLevel > 0)
+			{
+				boostRequest = true;
 			}
 
 			if (Input.GetKeyDown(moveRightKey) || Input.GetKeyDown(moveLeftKey))

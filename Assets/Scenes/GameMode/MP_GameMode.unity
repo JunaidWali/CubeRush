@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.2
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0025406443, g: 0.02013488, b: 0.045915574, a: 0.2}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 0.2}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -273,6 +273,21 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.maxColor.r
       value: 0.99607843
       objectReference: {fileID: 0}
+    - target: {fileID: 3657891590766029213, guid: f7b8387cc37bda94098ac7875034e696,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3657891590766029213, guid: f7b8387cc37bda94098ac7875034e696,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3657891590766029213, guid: f7b8387cc37bda94098ac7875034e696,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3685209046872124159, guid: f7b8387cc37bda94098ac7875034e696,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -323,9 +338,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4362838696455066291, guid: f7b8387cc37bda94098ac7875034e696,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 61
+      objectReference: {fileID: 0}
     - target: {fileID: 4645271193828249869, guid: f7b8387cc37bda94098ac7875034e696,
         type: 3}
       propertyPath: jumpKey
+      value: 306
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645271193828249869, guid: f7b8387cc37bda94098ac7875034e696,
+        type: 3}
+      propertyPath: boostKey
       value: 119
       objectReference: {fileID: 0}
     - target: {fileID: 4645271193828249869, guid: f7b8387cc37bda94098ac7875034e696,
@@ -382,6 +407,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.r
       value: 0.9960785
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192278816052021007, guid: f7b8387cc37bda94098ac7875034e696,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192278816052021007, guid: f7b8387cc37bda94098ac7875034e696,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8009474077415711491, guid: f7b8387cc37bda94098ac7875034e696,
         type: 3}
@@ -504,6 +539,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 1 Blue
       objectReference: {fileID: 0}
+    - target: {fileID: 3657891590766029213, guid: f7b8387cc37bda94098ac7875034e696,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3657891590766029213, guid: f7b8387cc37bda94098ac7875034e696,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3657891590766029213, guid: f7b8387cc37bda94098ac7875034e696,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3685209046872124159, guid: f7b8387cc37bda94098ac7875034e696,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -556,23 +606,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6223738416544279023, guid: f7b8387cc37bda94098ac7875034e696,
         type: 3}
-      propertyPath: m_NormalizedViewPortRect.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6223738416544279023, guid: f7b8387cc37bda94098ac7875034e696,
-        type: 3}
-      propertyPath: m_NormalizedViewPortRect.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6223738416544279023, guid: f7b8387cc37bda94098ac7875034e696,
-        type: 3}
-      propertyPath: m_NormalizedViewPortRect.width
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6223738416544279023, guid: f7b8387cc37bda94098ac7875034e696,
-        type: 3}
       propertyPath: m_NormalizedViewPortRect.height
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192278816052021007, guid: f7b8387cc37bda94098ac7875034e696,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192278816052021007, guid: f7b8387cc37bda94098ac7875034e696,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

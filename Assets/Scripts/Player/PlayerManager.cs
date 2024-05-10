@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -19,17 +20,21 @@ public class PlayerManager : MonoBehaviour
 
 	// Player movement variables
 	public float restartDelay;      // Time to wait before restarting the level
+	public float forwardForce;      // Variable that determines the forward force
+	public float sidewaysForce;     // Variable that determines the sideways force
+	public float jumpForce;         // Variable that determines the jump force
 
-	public float forwardForce;  	// Variable that determines the forward force
-	public float sidewaysForce;  	// Variable that determines the sideways force
-
-	public float jumpForce; 		// Variable that determines the jump force
+	// Boost variables
+	public float boostForce;        // Variable that determines the boost force
+	public float boostLevel;  // Variable that determines the boost level
+	public Slider boostMeter;    // Reference to the boost meter UI
 
 	// Player movement requests
 	protected bool jumpRequest = false;
 	protected bool rightMoveRequest = false;
 	protected bool leftMoveRequest = false;
 	protected bool isGrounded = true;
+	protected bool boostRequest = false;
 
 	protected AudioSource playerStartMovementAudio;
 	protected AudioSource playerContinousMovementAudio;
@@ -56,6 +61,9 @@ public class PlayerManager : MonoBehaviour
 
 	IEnumerator Start()
 	{
+		boostMeter = GetComponentInChildren<Slider>();
+		boostLevel = boostMeter.value;
+
 		// We assign the spot light component to our spotLight variable
 		spotLight = transform.parent.Find("Spot Light").GetComponent<Light>();
 
@@ -70,7 +78,7 @@ public class PlayerManager : MonoBehaviour
 		storedVelocity = Vector3.zero;
 
 		DisablePlayer();
-		yield return new WaitForSeconds(9f);
+		yield return new WaitForSeconds(11f);
 		EnablePlayer();
 	}
 
@@ -89,8 +97,22 @@ public class PlayerManager : MonoBehaviour
 				justPaused = false;
 			}
 
-			// Add a forward force
-			rb.AddForce(0, 0, forwardForce * Time.deltaTime);
+			boostMeter.value = boostLevel;
+			if (boostRequest && boostLevel > 0)
+			{
+				// Use boost
+				rb.AddForce(0, 0, boostForce * Time.deltaTime, ForceMode.Impulse);
+				boostRequest = false;
+
+				// Decrease boost level
+				boostLevel -= 0.1f; // Decrease the boost level by 0.01
+			}
+
+			// Calculate the reduction factor based on the x velocity
+			float reductionFactor = 1 - (Mathf.Abs(rb.velocity.x) * 0.01f);
+
+			// Add a forward force, scaled by the reduction factor
+			rb.AddForce(0, 0, forwardForce * Time.deltaTime * reductionFactor);
 
 			if (rightMoveRequest)
 			{
@@ -150,6 +172,7 @@ public class PlayerManager : MonoBehaviour
 		ShowPlayer();
 		// Start the coroutine to reset the camera's position
 		yield return StartCoroutine(MoveCamera(restartDelay));
+		boostLevel = boostMeter.maxValue;
 		EnablePlayer();
 	}
 

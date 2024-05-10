@@ -29,7 +29,7 @@ public class LevelComplete : MonoBehaviour
 	}
 
 	public void LoadLevelComplete()
-    {
-        SceneManager.LoadSceneAsync(GameManager.UIScene.UI_LevelComplete.ToString(), LoadSceneMode.Additive);
-    }
+	{
+		SceneManager.LoadSceneAsync(GameManager.UIScene.UI_LevelComplete.ToString(), LoadSceneMode.Additive);
+	}
 }
