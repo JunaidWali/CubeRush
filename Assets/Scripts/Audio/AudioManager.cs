@@ -5,8 +5,8 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
 
-    public float levelThemeVolume = 0.3f;
-    public float levelThemeVolumeSilenced = 0.1f;
+    public float defaultVolume = 0.3f;
+    public float silencedVolume = 0.1f;
 
     [SerializeField] private Sound[] sounds;
 
@@ -29,103 +29,72 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void Play(string name)
-    {
-        Sound sound = Array.Find(sounds, s => s.name == name);
-        sound.source.Play();
-    }
-
-    public void PlayDelayed(string name, float delay)
-    {
-        Sound sound = Array.Find(sounds, s => s.name == name);
-        sound.source.PlayDelayed(delay);
-    }
-
-    public void Stop(string name)
-    {
-        Sound sound = Array.Find(sounds, s => s.name == name);
-        sound.source.Stop();
-    }
-
     public void StopAll()
     {
-        foreach (Sound sound in sounds)
+        // Stop all AudioSources
+        foreach (AudioSource audioSource in FindObjectsOfType<AudioSource>())
         {
-            sound.source.Stop();
+            audioSource.Stop();
         }
     }
 
     public void StopAllExcept(string name)
     {
-        foreach (Sound sound in sounds)
+        // Stop all AudioSources except the one with the specified name
+        foreach (AudioSource audioSource in FindObjectsOfType<AudioSource>())
         {
-            if (sound.name != name)
+            if (audioSource.clip.name != name)
             {
-                sound.source.Stop();
+                audioSource.Stop();
             }
         }
     }
 
-    public void Pause(string name)
-    {
-        Sound sound = Array.Find(sounds, s => s.name == name);
-        sound.source.Pause();
-    }
-
     public void PauseAll()
     {
-        foreach (Sound sound in sounds)
+        // Pause all AudioSources
+        foreach (AudioSource audioSource in FindObjectsOfType<AudioSource>())
         {
-            sound.source.Pause();
+            if (audioSource.isPlaying)
+            {
+                audioSource.Pause();
+            }
         }
     }
 
     public void PauseAllExcept(string name)
     {
-        foreach (Sound sound in sounds)
+        // Pause all AudioSources except the one with the specified name
+        foreach (AudioSource audioSource in FindObjectsOfType<AudioSource>())
         {
-            if (sound.name != name)
+            if (audioSource.isPlaying && audioSource.clip.name != name)
             {
-                sound.source.Pause();
+                audioSource.Pause();
             }
         }
     }
 
-    public void UnPause(string name)
-    {
-        Sound sound = Array.Find(sounds, s => s.name == name);
-        sound.source.UnPause();
-    }
-
     public void UnPauseAll()
     {
-        foreach (Sound sound in sounds)
+        // Unpause all AudioSources
+        foreach (AudioSource audioSource in FindObjectsOfType<AudioSource>())
         {
-            sound.source.UnPause();
+            audioSource.UnPause();
         }
     }
 
-    public void SetVolume(string name, float volume)
+    public AudioSource GetSource(string name)
     {
-        Sound sound = Array.Find(sounds, s => s.name == name);
-        sound.source.volume = volume;
-    }
+        // Get the AudioSource with the specified name
+        foreach (Sound sound in sounds)
+        {
+            if (sound.name == name)
+            {
+                return sound.source;
+            }
+        }
 
-    public void SetPitch(string name, float pitch)
-    {
-        Sound sound = Array.Find(sounds, s => s.name == name);
-        sound.source.pitch = pitch;
-    }
-
-    public bool IsPlaying(string name)
-    {
-        Sound sound = Array.Find(sounds, s => s.name == name);
-        return sound.source.isPlaying;
-    }
-
-    public AudioSource GetAudioSource(string name)
-    {
-        Sound sound = Array.Find(sounds, s => s.name == name);
-        return sound.source;
+        // Return null if no AudioSource is found with the specified name
+        return null;
     }
 }

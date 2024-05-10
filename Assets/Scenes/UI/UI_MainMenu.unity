@@ -694,9 +694,10 @@ GameObject:
   - component: {fileID: 1420219377}
   - component: {fileID: 1420219378}
   - component: {fileID: 1420219379}
+  - component: {fileID: 1420219380}
   m_Layer: 0
   m_Name: AudioManager
-  m_TagString: Untagged
+  m_TagString: AudioManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -728,8 +729,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8c8af10bdfb3134f900fc64834d5a1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelThemeVolume: 0.3
-  levelThemeVolumeSilenced: 0.1
+  defaultVolume: 0.3
+  silencedVolume: 0.1
   sounds:
   - name: MainMenuTheme
     clip: {fileID: 8300000, guid: dfd3574752c332246b1307e548a740f2, type: 3}
@@ -766,49 +767,14 @@ MonoBehaviour:
     volume: 0.5
     pitch: 1
     source: {fileID: 0}
-  - name: PlayerJump
-    clip: {fileID: 8300000, guid: 8154f5e18ea48164e9cb0132012cf432, type: 3}
-    loop: 0
-    playOnAwake: 0
-    volume: 0.3
-    pitch: 1
-    source: {fileID: 0}
-  - name: PlayerStartMovement
-    clip: {fileID: 8300000, guid: 0470ffe2dac878047ba1eee586bd834c, type: 3}
-    loop: 0
-    playOnAwake: 0
-    volume: 0.8
-    pitch: 1
-    source: {fileID: 0}
-  - name: PlayerContinousMovement
-    clip: {fileID: 8300000, guid: b3024fad7fc03f144b22f592a7a19375, type: 3}
-    loop: 1
-    playOnAwake: 0
-    volume: 0.3
-    pitch: 1
-    source: {fileID: 0}
-  - name: PlayerCrash
-    clip: {fileID: 8300000, guid: bddcb25502b410940b1f286fc805956f, type: 3}
-    loop: 0
-    playOnAwake: 0
-    volume: 0.5
-    pitch: 1
-    source: {fileID: 0}
-  - name: GroundHit
-    clip: {fileID: 8300000, guid: 0ee371361ed6eaf49bd8d957f8d8efb9, type: 3}
-    loop: 0
-    playOnAwake: 0
-    volume: 0.5
-    pitch: 1
-    source: {fileID: 0}
-  - name: Countdown Number
+  - name: CountdownNumber
     clip: {fileID: 8300000, guid: 6c23de2b6aaed704cb0aebd8de468a46, type: 3}
     loop: 0
     playOnAwake: 0
     volume: 0.5
     pitch: 1
     source: {fileID: 0}
-  - name: Countdown GO
+  - name: CountdownGO
     clip: {fileID: 8300000, guid: 642925feae63ca54f96ab55afeb02ad5, type: 3}
     loop: 0
     playOnAwake: 0
@@ -823,6 +789,19 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1420219376}
   m_Enabled: 1
+--- !u!114 &1420219380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420219376}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19ed507fbc13e584e86c7aef92b2a7bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &1511411939
 GameObject:
   m_ObjectHideFlags: 0

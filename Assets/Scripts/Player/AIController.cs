@@ -74,7 +74,7 @@ public class AIController : PlayerManager
             // forward.GetComponent<TextMeshProUGUI>().enabled = moveDirection == null;
         }
     }
-        
+
 
     private bool IfObstacleForward()
     {

@@ -2,16 +2,23 @@ using UnityEngine;
 
 public class UI_GameOver : MonoBehaviour
 {
+    private AudioSource buttonClickAudio;
+
+    void Awake()
+    {
+        buttonClickAudio = AudioManager.Instance.GetSource("ButtonClick");
+    }
+
     public void MainMenuButton()
     {
         AudioManager.Instance.StopAll();
-        AudioManager.Instance.Play("ButtonClick");
+        buttonClickAudio.Play();
         StartCoroutine(GameManager.Instance.LoadUI(GameManager.UIScene.UI_MainMenu));
     }
 
     public void QuitGameButton()
     {
-        AudioManager.Instance.Play("ButtonClick");
+        buttonClickAudio.Play();
         GameManager.Instance.QuitGame();
     }
 }

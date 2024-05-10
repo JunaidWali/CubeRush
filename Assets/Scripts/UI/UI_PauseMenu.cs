@@ -7,6 +7,18 @@ public class UI_PauseMenu : MonoBehaviour
     [SerializeField] private UI_CountdownController countdownController;
     public bool isGamePaused = false;
     public bool isCountdownFinished = false;
+    private AudioSource levelThemeAudio;
+    private AudioSource buttonClickAudio;
+    private AudioSource pauseAudio;
+    private AudioSource unpauseAudio;
+
+    void Awake()
+    {
+        levelThemeAudio = AudioManager.Instance.GetSource("LevelTheme");
+        buttonClickAudio = AudioManager.Instance.GetSource("ButtonClick");
+        pauseAudio = AudioManager.Instance.GetSource("Pause");
+        unpauseAudio = AudioManager.Instance.GetSource("Unpause");
+    }
 
     void Update()
     {
@@ -28,8 +40,8 @@ public class UI_PauseMenu : MonoBehaviour
 
     public void OnRestartLevelButtonClick()
     {
-        AudioManager.Instance.SetVolume("LevelTheme", AudioManager.Instance.levelThemeVolume);
-        AudioManager.Instance.Play("ButtonClick");
+        levelThemeAudio.volume = AudioManager.Instance.defaultVolume;
+        buttonClickAudio.Play();
         GameManager.Instance.RestartLevel();
     }
 
@@ -41,16 +53,16 @@ public class UI_PauseMenu : MonoBehaviour
     public void OnMainMenuButtonClick()
     {
         AudioManager.Instance.StopAll();
-        AudioManager.Instance.SetVolume("LevelTheme", AudioManager.Instance.levelThemeVolume);
-        AudioManager.Instance.Play("ButtonClick");
+        levelThemeAudio.volume = AudioManager.Instance.defaultVolume;
+        buttonClickAudio.Play();
         StartCoroutine(GameManager.Instance.LoadUI(GameManager.UIScene.UI_MainMenu));
     }
 
     public void PauseGame()
     {
         AudioManager.Instance.PauseAllExcept("LevelTheme");
-        AudioManager.Instance.SetVolume("LevelTheme", AudioManager.Instance.levelThemeVolumeSilenced);
-        AudioManager.Instance.Play("Pause");
+        levelThemeAudio.volume = AudioManager.Instance.silencedVolume;
+        pauseAudio.Play();
         pauseMenu.enabled = true;
         isGamePaused = true;
     }
@@ -59,14 +71,14 @@ public class UI_PauseMenu : MonoBehaviour
     {
         pauseMenu.enabled = false;
         isCountdownFinished = false;
+        unpauseAudio.Play();
         StartCoroutine(countdownController.CountdownToStart(OnCountdownFinished));
     }
 
     private void OnCountdownFinished()
     {
         AudioManager.Instance.UnPauseAll();
-        AudioManager.Instance.SetVolume("LevelTheme", AudioManager.Instance.levelThemeVolume);
-        AudioManager.Instance.Play("Unpause");
+        levelThemeAudio.volume = AudioManager.Instance.defaultVolume;
         isCountdownFinished = true;
         isGamePaused = false;
     }

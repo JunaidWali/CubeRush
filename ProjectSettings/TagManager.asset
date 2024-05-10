@@ -7,6 +7,7 @@ TagManager:
   - Obstacle
   - Ground
   - LowBar
+  - AudioManager
   layers:
   - Default
   - TransparentFX
