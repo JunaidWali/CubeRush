@@ -3,14 +3,13 @@ using UnityEngine;
 
 public class LevelStart : MonoBehaviour
 {
-    private UI_CountdownController countdownController;
+    [SerializeField] private UI_CountdownController countdownController;
     private UI_PauseMenu pauseMenu;
     private FollowPlayer followPlayer;
     private AudioSource levelTheme;
 
     void Awake()
     {
-        countdownController = FindObjectOfType<UI_CountdownController>();
         pauseMenu = FindObjectOfType<UI_PauseMenu>();
         followPlayer = AudioManager.Instance.GetComponent<FollowPlayer>();
         levelTheme = AudioManager.Instance.GetSource("LevelTheme");
