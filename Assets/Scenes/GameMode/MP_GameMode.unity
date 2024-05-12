@@ -239,6 +239,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4645271193828249869, guid: f7b8387cc37bda94098ac7875034e696,
         type: 3}
+      propertyPath: playerName
+      value: Orange
+      objectReference: {fileID: 0}
+    - target: {fileID: 4645271193828249869, guid: f7b8387cc37bda94098ac7875034e696,
+        type: 3}
       propertyPath: moveLeftKey
       value: 97
       objectReference: {fileID: 0}
@@ -670,6 +675,11 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
       value: 0.023529414
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563013295540678881, guid: c5dd573d9bf04004a836e4a16a417c83,
+        type: 3}
+      propertyPath: playerName
+      value: Green
       objectReference: {fileID: 0}
     - target: {fileID: 3662849129298345267, guid: c5dd573d9bf04004a836e4a16a417c83,
         type: 3}

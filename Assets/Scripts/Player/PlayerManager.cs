@@ -27,7 +27,7 @@ public class PlayerManager : MonoBehaviour
 	// Boost variables
 	public float boostForce;        // Variable that determines the boost force
 	public float boostLevel;  // Variable that determines the boost level
-	public Slider boostMeter;    // Reference to the boost meter UI
+	private Slider boostMeter;    // Reference to the boost meter UI
 
 	// Player movement requests
 	protected bool jumpRequest = false;

@@ -248,6 +248,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LowBar (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1932898949341556, guid: a7dffc069b60d344781ebf7276d7237a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4708392452524702, guid: a7dffc069b60d344781ebf7276d7237a, type: 3}
       propertyPath: m_LocalScale.x
       value: 4.70016
