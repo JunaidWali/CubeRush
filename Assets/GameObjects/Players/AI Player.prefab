@@ -25403,7 +25403,7 @@ MonoBehaviour:
   playerName: Pink
   restartDelay: 1
   forwardForce: 4000
-  sidewaysForce: 70
+  sidewaysForce: 1.4
   jumpForce: 8
   boostForce: 0
   boostLevel: 1
