@@ -27,7 +27,7 @@ public class PlayerManager : MonoBehaviour
 	// Boost variables
 	public float boostForce;        // Variable that determines the boost force
 	public float boostLevel;  // Variable that determines the boost level
-	public Slider boostMeter;    // Reference to the boost meter UI
+	private Slider boostMeter;    // Reference to the boost meter UI
 
 	// Player movement requests
 	protected bool jumpRequest = false;
@@ -113,14 +113,14 @@ public class PlayerManager : MonoBehaviour
 			if (rightMoveRequest)
 			{
 				// Add a force to the right
-				rb.AddForce(sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+				rb.AddForce(sidewaysForce, 0, 0, ForceMode.VelocityChange);
 				rightMoveRequest = false;
 			}
 
 			if (leftMoveRequest)
 			{
 				// Add a force to the left
-				rb.AddForce(-sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+				rb.AddForce(-sidewaysForce, 0, 0, ForceMode.VelocityChange);
 				leftMoveRequest = false;
 			}
 

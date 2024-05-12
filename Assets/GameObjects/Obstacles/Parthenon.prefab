@@ -416,6 +416,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LowBar (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1932898949341556, guid: a7dffc069b60d344781ebf7276d7237a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4708392452524702, guid: a7dffc069b60d344781ebf7276d7237a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.2950096
@@ -944,6 +948,10 @@ PrefabInstance:
     - target: {fileID: 1932898949341556, guid: a7dffc069b60d344781ebf7276d7237a, type: 3}
       propertyPath: m_Name
       value: LowBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932898949341556, guid: a7dffc069b60d344781ebf7276d7237a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4708392452524702, guid: a7dffc069b60d344781ebf7276d7237a, type: 3}
       propertyPath: m_LocalPosition.x
