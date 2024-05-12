@@ -15104,9 +15104,9 @@ MonoBehaviour:
   playerName: Blue
   restartDelay: 1
   forwardForce: 4000
-  sidewaysForce: 70
+  sidewaysForce: 1.4
   jumpForce: 8
-  boostForce: 50
+  boostForce: 75
   boostLevel: 1
   boostMeter: {fileID: 0}
   playerStartMovementAudio: {fileID: 3560496124441076946}

@@ -113,14 +113,14 @@ public class PlayerManager : MonoBehaviour
 			if (rightMoveRequest)
 			{
 				// Add a force to the right
-				rb.AddForce(sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+				rb.AddForce(sidewaysForce, 0, 0, ForceMode.VelocityChange);
 				rightMoveRequest = false;
 			}
 
 			if (leftMoveRequest)
 			{
 				// Add a force to the left
-				rb.AddForce(-sidewaysForce * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+				rb.AddForce(-sidewaysForce, 0, 0, ForceMode.VelocityChange);
 				leftMoveRequest = false;
 			}
 
