@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class LevelComplete : MonoBehaviour
 {
 	private Animation endTransition;
-	private FollowPlayer followPlayer;
+	private FollowPlayer audioListener;
 	[SerializeField] private Camera endCamera;
 
 	[NonSerialized] public string playerName;
@@ -14,7 +14,7 @@ public class LevelComplete : MonoBehaviour
 	void Awake()
 	{
 		endTransition = endCamera.GetComponent<Animation>();
-		followPlayer = AudioManager.Instance.GetComponent<FollowPlayer>();
+		audioListener = AudioManager.Instance.GetComponent<FollowPlayer>();
 	}
 
 	void OnTriggerEnter(Collider player)
@@ -22,7 +22,7 @@ public class LevelComplete : MonoBehaviour
 		playerPlacement++;
 		if (!GameManager.Instance.isLevelCompleted && player.CompareTag("Player"))
 		{
-			followPlayer.enabled = false;
+			audioListener.enabled = false;
 			GameManager.Instance.isLevelCompleted = true;
 			GameObject.Find("EventSystem").SetActive(false);
 			playerName = player.GetComponentInChildren<PlayerManager>().playerName;
