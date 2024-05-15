@@ -25,9 +25,10 @@ public class PlayerManager : MonoBehaviour
 	public float forwardForce;      // Variable that determines the forward force
 	public float sidewaysForce;     // Variable that determines the sideways force
 	public float jumpForce;         // Variable that determines the jump force
+	public float brakeForce;        // Variable that determines the brake force
+	public float boostForce;        // Variable that determines the boost force
 
 	// Boost variables
-	public float boostForce;        // Variable that determines the boost force
 	public float boostLevel;  // Variable that determines the boost level
 	private Slider boostMeter;    // Reference to the boost meter UI
 
@@ -35,9 +36,12 @@ public class PlayerManager : MonoBehaviour
 	protected bool jumpRequest = false;
 	protected bool rightMoveRequest = false;
 	protected bool leftMoveRequest = false;
-	protected bool isGrounded = true;
 	protected bool boostRequest = false;
+	protected bool brakeRequest = false;
 
+	protected bool isGrounded = true;
+
+	// Audio sources
 	[SerializeField] protected AudioSource playerStartMovementAudio;
 	[SerializeField] protected AudioSource playerContinousMovementAudio;
 	[SerializeField] protected AudioSource playerJumpAudio;
@@ -109,11 +113,23 @@ public class PlayerManager : MonoBehaviour
 				// Set the target FOV for the tunnel vision effect
 				targetFOV = originalFOV + 40;
 			}
+
+			else if (brakeRequest)
+			{
+				// Use brake
+				rb.AddForce(0, 0, -brakeForce * Time.deltaTime, ForceMode.Impulse);
+				brakeRequest = false;
+
+				// Set the target FOV for the tunnel vision effect
+				targetFOV = originalFOV - 20;
+			}
+
 			else
 			{
 				// Set the target FOV to its original value when not boosting
 				targetFOV = originalFOV;
 			}
+
 			// Smoothly transition the FOV
 			playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, targetFOV, Time.deltaTime * 0.5f);
 
