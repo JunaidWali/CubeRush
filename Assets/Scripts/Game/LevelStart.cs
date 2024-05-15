@@ -5,20 +5,20 @@ public class LevelStart : MonoBehaviour
 {
     [SerializeField] private UI_CountdownController countdownController;
     private UI_PauseMenu pauseMenu;
-    private FollowPlayer followPlayer;
+    private FollowPlayer audioListener;
     private AudioSource levelTheme;
 
     void Awake()
     {
         pauseMenu = FindObjectOfType<UI_PauseMenu>();
-        followPlayer = AudioManager.Instance.GetComponent<FollowPlayer>();
+        audioListener = AudioManager.Instance.GetComponent<FollowPlayer>();
         levelTheme = AudioManager.Instance.GetSource("LevelTheme");
     }
 
     // Start is called before the first frame update
     IEnumerator Start()
     {
-        followPlayer.enabled = true;
+        audioListener.enabled = true;
         if (!levelTheme.isPlaying)
         {
             levelTheme.Play();
