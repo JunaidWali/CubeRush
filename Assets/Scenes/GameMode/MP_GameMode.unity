@@ -222,10 +222,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4189111508667445132, guid: f7b8387cc37bda94098ac7875034e696,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.7882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189111508667445132, guid: f7b8387cc37bda94098ac7875034e696,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189111508667445132, guid: f7b8387cc37bda94098ac7875034e696,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.48235297
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189111508667445132, guid: f7b8387cc37bda94098ac7875034e696,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.9960785
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362838696455066291, guid: f7b8387cc37bda94098ac7875034e696,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362838696455066291, guid: f7b8387cc37bda94098ac7875034e696,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362838696455066291, guid: f7b8387cc37bda94098ac7875034e696,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 33.679443
+      objectReference: {fileID: 0}
     - target: {fileID: 4362838696455066291, guid: f7b8387cc37bda94098ac7875034e696,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 61
+      value: 654
       objectReference: {fileID: 0}
     - target: {fileID: 4645271193828249869, guid: f7b8387cc37bda94098ac7875034e696,
         type: 3}
