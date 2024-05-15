@@ -15106,6 +15106,7 @@ MonoBehaviour:
   forwardForce: 4000
   sidewaysForce: 1.4
   jumpForce: 8
+  brakeForce: 50
   boostForce: 75
   boostLevel: 1
   playerStartMovementAudio: {fileID: 3560496124441076946}
@@ -15115,6 +15116,7 @@ MonoBehaviour:
   moveLeftKey: 276
   jumpKey: 32
   boostKey: 273
+  brakeKey: 274
 --- !u!82 &3560496124441076946
 AudioSource:
   m_ObjectHideFlags: 0
@@ -15826,7 +15828,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 1
+  near clip plane: 0.01
   far clip plane: 120
   field of view: 60
   orthographic: 0
