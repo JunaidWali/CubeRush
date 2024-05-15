@@ -17,6 +17,8 @@ public class PlayerManager : MonoBehaviour
 	// Refernce to the player's camera
 	protected Camera playerCamera;
 	protected Vector3 playerCameraStartingPosition;    // Camera starting position
+	private float originalFOV;
+	private float targetFOV;
 
 	// Player movement variables
 	public float restartDelay;      // Time to wait before restarting the level
@@ -66,6 +68,7 @@ public class PlayerManager : MonoBehaviour
 		// We assign the camera component to our playerCamera variable
 		playerCamera = transform.parent.Find("Camera").GetComponent<Camera>();
 		playerCameraStartingPosition = playerCamera.transform.position;
+		originalFOV = playerCamera.fieldOfView; // Store the original FOV
 
 		// We assign the pause menu component to our pauseMenu variable
 		pauseMenu = FindObjectOfType<UI_PauseMenu>();
@@ -102,7 +105,17 @@ public class PlayerManager : MonoBehaviour
 
 				// Decrease boost level
 				boostLevel -= 0.1f; // Decrease the boost level by 0.01
+
+				// Set the target FOV for the tunnel vision effect
+				targetFOV = originalFOV + 40;
 			}
+			else
+			{
+				// Set the target FOV to its original value when not boosting
+				targetFOV = originalFOV;
+			}
+			// Smoothly transition the FOV
+			playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, targetFOV, Time.deltaTime * 0.5f);
 
 			// Calculate the reduction factor based on the x velocity
 			float reductionFactor = 1 - (Mathf.Abs(rb.velocity.x) * 0.01f);

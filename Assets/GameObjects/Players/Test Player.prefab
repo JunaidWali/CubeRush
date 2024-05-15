@@ -15082,6 +15082,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5df08099f45fcb4e8d82a9d0349cacf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCrashAudio: {fileID: 0}
+  playerGroundHitAudio: {fileID: 0}
 --- !u!114 &4645271193828249869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15101,7 +15103,9 @@ MonoBehaviour:
   jumpForce: 8
   boostForce: 50
   boostLevel: 1
-  boostMeter: {fileID: 0}
+  playerStartMovementAudio: {fileID: 0}
+  playerContinousMovementAudio: {fileID: 0}
+  playerJumpAudio: {fileID: 0}
   moveRightKey: 275
   moveLeftKey: 276
   jumpKey: 274
