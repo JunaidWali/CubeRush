@@ -1,0 +1,114 @@
+{
+    "name": "Player1Controls",
+    "maps": [
+        {
+            "name": "PlayerControls",
+            "id": "4e55627d-0c17-41d1-8d0f-10dbc0397ced",
+            "actions": [
+                {
+                    "name": "Boost",
+                    "type": "Button",
+                    "id": "72646d34-b0ac-42e3-b3ad-0106540eac32",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MoveLeft",
+                    "type": "Button",
+                    "id": "7575f38e-e81b-4b69-a5ef-34c8be039852",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MoveRight",
+                    "type": "Button",
+                    "id": "c8000eb8-88f4-4a7f-bcbf-227f7dbee096",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Brake",
+                    "type": "Button",
+                    "id": "6395abfd-b778-497e-b52b-505557ca4cca",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "209e3fe5-76c0-4055-8473-a763f4013c4c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3b0db823-ba39-458f-8409-7274823373d0",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Boost",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "44e312ef-3e1f-4248-97a3-22c8d3a33d42",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "28ad780c-3972-4fa5-8c04-dd620eba5e9c",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a22d268e-85d9-4780-93d0-50908bcd8f6e",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Brake",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "34b6761b-ceca-4398-8e0b-acdbf908d238",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

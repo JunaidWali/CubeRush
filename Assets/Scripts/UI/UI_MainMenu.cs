@@ -4,12 +4,16 @@ public class UI_MainMenu : MonoBehaviour
 {
     private AudioSource buttonClickAudio;
     private AudioSource mainMenuThemeAudio;
+    private Animation menuIconRotateAnimation;
+    private Canvas settingsMenu;
 
     void Start()
     {
         buttonClickAudio = AudioManager.Instance.GetSource("ButtonClick");
         mainMenuThemeAudio = AudioManager.Instance.GetSource("MainMenuTheme");
         mainMenuThemeAudio.Play();
+        menuIconRotateAnimation = transform.Find("OpenSettingsButton").GetComponent<Animation>();
+        settingsMenu = transform.Find("SettingsMenu").GetComponent<Canvas>();
     }
 
     public void OnSinglePlayerButtonClick()
@@ -26,5 +30,19 @@ public class UI_MainMenu : MonoBehaviour
         buttonClickAudio.Play();
         GameManager.Instance.SetCurrentGameMode(GameManager.GameMode.MultiPlayer);
         GameManager.Instance.StartGameAs();
+    }
+
+    public void OnOpenSettingsButtonClick()
+    {
+        buttonClickAudio.Play();
+        menuIconRotateAnimation.Play("SettingsIconRotate");
+        settingsMenu.GetComponent<Animation>().Play("SettingsMenuOpen");
+    }
+
+    public void OnCloseSettingsButtonClick()
+    {
+        buttonClickAudio.Play();
+        settingsMenu.GetComponent<Animation>().Play("SettingsMenuClose");
+        menuIconRotateAnimation.Play("SettingsIconRotateBack");
     }
 }

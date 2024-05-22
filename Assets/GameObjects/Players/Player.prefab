@@ -15112,11 +15112,8 @@ MonoBehaviour:
   playerStartMovementAudio: {fileID: 3560496124441076946}
   playerContinousMovementAudio: {fileID: 8750852375768375590}
   playerJumpAudio: {fileID: 5908480301167201502}
-  moveRightKey: 275
-  moveLeftKey: 276
-  jumpKey: 32
-  boostKey: 273
-  brakeKey: 274
+  playerControls: {fileID: -944628639613478452, guid: 2adbe690b7610c74aa5fd307dbd1f317,
+    type: 3}
 --- !u!82 &3560496124441076946
 AudioSource:
   m_ObjectHideFlags: 0
@@ -15829,7 +15826,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.01
-  far clip plane: 120
+  far clip plane: 150
   field of view: 60
   orthographic: 0
   orthographic size: 5

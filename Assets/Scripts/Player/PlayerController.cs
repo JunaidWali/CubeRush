@@ -1,28 +1,65 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : PlayerManager
 {
 	// Player control variables
-	[SerializeField] private KeyCode moveRightKey = KeyCode.RightArrow; // Default key for moving right
-	[SerializeField] private KeyCode moveLeftKey = KeyCode.LeftArrow;   // Default key for moving left
-	[SerializeField] private KeyCode jumpKey = KeyCode.UpArrow;         // Default key for jumping
-	[SerializeField] private KeyCode boostKey = KeyCode.Space;          // Default key for boosting
-	[SerializeField] private KeyCode brakeKey = KeyCode.DownArrow;      // Default key for braking
+	[SerializeField] private InputActionAsset playerControls;
+
+	private InputAction moveRight;
+	private InputAction moveLeft;
+	private InputAction jump;
+	private InputAction boost;
+	private InputAction brake;
+
+	new void Awake()
+	{
+		base.Awake();
+		// Initialize the InputActions
+		moveRight = playerControls.FindAction("PlayerControls/MoveRight");
+		moveLeft = playerControls.FindAction("PlayerControls/MoveLeft");
+		jump = playerControls.FindAction("PlayerControls/Jump");
+		boost = playerControls.FindAction("PlayerControls/Boost");
+		brake = playerControls.FindAction("PlayerControls/Brake");
+	}
+
+	private void OnEnable()
+	{
+		// Enable the InputActions
+		moveRight.Enable();
+		moveLeft.Enable();
+		jump.Enable();
+		boost.Enable();
+		brake.Enable();
+	}
+
+	private void OnDisable()
+	{
+		// Disable the InputActions
+		moveRight.Disable();
+		moveLeft.Disable();
+		jump.Disable();
+		boost.Disable();
+		brake.Disable();
+	}
+
 	void Update()
 	{
 		if (!pauseMenu.isGamePaused)
 		{
-			if (Input.GetKey(moveRightKey))
+			if (moveRight.ReadValue<float>() > 0)
 			{
 				rightMoveRequest = true;
+				targetPitch = 1.3f;
 			}
 
-			if (Input.GetKey(moveLeftKey))
+			if (moveLeft.ReadValue<float>() > 0)
 			{
 				leftMoveRequest = true;
+				targetPitch = 1.3f;
 			}
 
-			if (Input.GetKeyDown(jumpKey))
+			if (jump.ReadValue<float>() > 0)
 			{
 				if (isGrounded)
 				{
@@ -30,22 +67,17 @@ public class PlayerController : PlayerManager
 					jumpRequest = true;
 				}
 			}
-			if (Input.GetKey(boostKey) && boostLevel > 0)
+			if (boost.ReadValue<float>() > 0 && boostLevel > 0)
 			{
 				boostRequest = true;
 			}
 
-			if (Input.GetKey(brakeKey))
+			if (brake.ReadValue<float>() > 0)
 			{
 				brakeRequest = true;
 			}
 
-			if (Input.GetKeyDown(moveRightKey) || Input.GetKeyDown(moveLeftKey))
-			{
-				targetPitch = 1.3f;
-			}
-
-			if (Input.GetKeyUp(moveRightKey) || Input.GetKeyUp(moveLeftKey))
+			if (moveLeft.ReadValue<float>() == 0 || moveRight.ReadValue<float>() == 0)
 			{
 				targetPitch = 1f;
 			}
