@@ -297,6 +297,12 @@ PrefabInstance:
       propertyPath: moveRightKey
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 4645271193828249869, guid: f7b8387cc37bda94098ac7875034e696,
+        type: 3}
+      propertyPath: playerControls
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 2e2587a3ac3581a4f94257527703cb78,
+        type: 3}
     - target: {fileID: 6223738416544279023, guid: f7b8387cc37bda94098ac7875034e696,
         type: 3}
       propertyPath: m_NormalizedViewPortRect.x
